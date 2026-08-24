@@ -8,10 +8,6 @@
   flex-direction: column;
 }
 
-/* ---------------------------------------------------------
-   Linha do acordeão
-   --------------------------------------------------------- */
-
 .svc {
   border-top: 1px solid var(--line);
 }
@@ -139,10 +135,6 @@
   border-color: var(--purple);
   color: var(--white);
 }
-
-/* ---------------------------------------------------------
-   Painel expansível (grid-rows 0fr → 1fr)
-   --------------------------------------------------------- */
 
 .svc__collapse {
   display: grid;

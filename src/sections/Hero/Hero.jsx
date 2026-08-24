@@ -1,5 +1,6 @@
+import Button from '../../components/Button/Button'
 import Reveal from '../../components/Reveal'
-import { DotLine } from '../../components/Node'
+import { DotLine } from '../../components/Node/Node'
 import GrowthChart from '../../components/GrowthChart/GrowthChart'
 import { HERO } from '../../data/content'
 import './Hero.css'
@@ -25,12 +26,10 @@ export default function Hero() {
           </Reveal>
 
           <Reveal className="hero__actions" delay={320}>
-            <a href={HERO.ctaPrimary.href} className="btn btn--primary btn--md">
-              {HERO.ctaPrimary.label}
-            </a>
-            <a href={HERO.ctaSecondary.href} className="btn btn--secondary btn--md">
+            <Button href={HERO.ctaPrimary.href}>{HERO.ctaPrimary.label}</Button>
+            <Button href={HERO.ctaSecondary.href} variant="secondary">
               {HERO.ctaSecondary.label}
-            </a>
+            </Button>
           </Reveal>
         </div>
 

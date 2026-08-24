@@ -1,5 +1,5 @@
 import Reveal from '../../components/Reveal'
-import Node from '../../components/Node'
+import Node from '../../components/Node/Node'
 import { MANIFESTO } from '../../data/content'
 import './Manifesto.css'
 

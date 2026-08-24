@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react'
 import './ScrollJourney.css'
 
-const LERP = 0.11
-const SNAP_DISTANCE = 0.0005
+const LERP = 0.12
+const SNAP_DISTANCE = 0.5
+/* Linha de referência na tela: o nó acompanha quando um ponto cruza esta fração da viewport */
+const VIEWPORT_ANCHOR = 0.62
+const SAMPLE_STEP = 4
 
 const XS_DESKTOP = [10, 86, 13, 85, 15, 83, 50]
 const XS_MOBILE = [12, 80, 18, 74, 22, 70, 50]
@@ -19,6 +22,23 @@ function buildPath(points) {
   return d
 }
 
+function lengthAtY(ys, ls, y) {
+  const last = ys.length - 1
+  if (last < 0) return 0
+  if (y <= ys[0]) return ls[0]
+  if (y >= ys[last]) return ls[last]
+  let lo = 0
+  let hi = last
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1
+    if (ys[mid] <= y) lo = mid
+    else hi = mid
+  }
+  const span = ys[hi] - ys[lo]
+  const t = span > 0 ? (y - ys[lo]) / span : 0
+  return ls[lo] + t * (ls[hi] - ls[lo])
+}
+
 export default function ScrollJourney() {
   const wrapRef = useRef(null)
   const svgRef = useRef(null)
@@ -26,11 +46,16 @@ export default function ScrollJourney() {
   const dotRef = useRef(null)
   const markerRefs = useRef([])
   const state = useRef({
-    total: 0,
-    thresholds: [],
     ready: false,
-    target: 0,
-    pos: null,
+    total: 0,
+    wrapTopDoc: 0,
+    minY: 0,
+    maxY: 0,
+    ys: [],
+    ls: [],
+    markerLens: [],
+    targetLen: 0,
+    posLen: 0,
   })
 
   useEffect(() => {
@@ -42,6 +67,7 @@ export default function ScrollJourney() {
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const s = state.current
+    let disposed = false
 
     function rebuild() {
       const rect = wrap.getBoundingClientRect()
@@ -80,71 +106,97 @@ export default function ScrollJourney() {
         m.setAttribute('r', '3.5')
       })
 
-      s.total = path.getTotalLength()
-      s.thresholds = points.map((p) => p.y / Math.max(points[points.length - 1].y, 1))
-      path.style.strokeDasharray = `${s.total}`
+      /* Amostra a curva uma única vez: y é monótono ao longo do caminho */
+      const total = path.getTotalLength()
+      const ys = []
+      const ls = []
+      for (let len = 0; len <= total; len += SAMPLE_STEP) {
+        const pt = path.getPointAtLength(len)
+        ys.push(pt.y)
+        ls.push(len)
+      }
+      if (ls[ls.length - 1] !== total) {
+        const pt = path.getPointAtLength(total)
+        ys.push(pt.y)
+        ls.push(total)
+      }
+
+      s.total = total
+      s.wrapTopDoc = wrapTop
+      s.minY = points[0].y
+      s.maxY = points[points.length - 1].y
+      s.ys = ys
+      s.ls = ls
+      s.markerLens = points.map((p) => lengthAtY(ys, ls, p.y))
+      path.style.strokeDasharray = `${total}`
       s.ready = true
     }
 
-    function apply(p) {
+    function apply(len) {
       if (!s.ready || !s.total) return
 
-      const clamped = Math.min(Math.max(p, 0), 1)
-      const len = clamped * s.total
-      const pt = path.getPointAtLength(len)
+      const clamped = Math.min(Math.max(len, 0), s.total)
+      const pt = path.getPointAtLength(clamped)
 
       dot.style.transform = `translate3d(${pt.x}px, ${pt.y}px, 0)`
-      path.style.strokeDashoffset = `${s.total * (1 - clamped)}`
+      path.style.strokeDashoffset = `${s.total - clamped}`
 
       markerRefs.current.forEach((m, i) => {
         if (!m) return
-        m.classList.toggle('is-passed', clamped >= s.thresholds[i] - 0.004)
+        m.classList.toggle('is-passed', clamped >= s.markerLens[i] - 0.5)
       })
 
       let nearestDist = Infinity
-      s.thresholds.forEach((t) => {
-        nearestDist = Math.min(nearestDist, Math.abs(clamped - t))
+      s.markerLens.forEach((ml) => {
+        nearestDist = Math.min(nearestDist, Math.abs(clamped - ml))
       })
-      dot.classList.toggle('is-touching', nearestDist < 0.02 && clamped < 0.985)
-      dot.classList.toggle('is-impact', clamped >= 0.985)
+      dot.classList.toggle('is-touching', nearestDist < 90 && clamped < s.total - 8)
+      dot.classList.toggle('is-impact', clamped >= s.total - 0.5)
+    }
+
+    function measure() {
+      if (!s.ready || !s.total) return
+
+      /* Progresso relativo à própria jornada: posição da viewport vs. geometria do traçado,
+         sem depender da altura total da página (footer incluído) que dessincronizava tudo. */
+      const desiredDocY = window.scrollY + window.innerHeight * VIEWPORT_ANCHOR
+      const localY = Math.min(Math.max(desiredDocY - s.wrapTopDoc, s.minY), s.maxY)
+
+      s.targetLen = lengthAtY(s.ys, s.ls, localY)
+      if (!reduced) schedule()
     }
 
     let rafId = null
 
     function tick() {
       rafId = null
-      if (!s.ready || !s.total) return
+      if (disposed || !s.ready || !s.total) return
 
-      if (s.pos === null) s.pos = s.target
-      s.pos += (s.target - s.pos) * LERP
-      if (Math.abs(s.target - s.pos) < SNAP_DISTANCE) s.pos = s.target
+      s.posLen += (s.targetLen - s.posLen) * LERP
+      if (Math.abs(s.targetLen - s.posLen) < SNAP_DISTANCE) s.posLen = s.targetLen
 
-      apply(s.pos)
+      apply(s.posLen)
 
-      if (s.pos !== s.target) rafId = requestAnimationFrame(tick)
+      if (s.posLen !== s.targetLen && !disposed) rafId = requestAnimationFrame(tick)
     }
 
     function schedule() {
       if (rafId === null) rafId = requestAnimationFrame(tick)
     }
 
-    function measure() {
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      s.target = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0
-      if (!reduced) schedule()
-    }
-
     function refreshGeometry() {
       rebuild()
+      if (!s.ready) return
       if (reduced) {
-        apply(1)
+        apply(s.total)
       } else {
         measure()
+        schedule()
       }
     }
 
     function waitForImages() {
-      const imgs = Array.from(wrap.querySelectorAll('img'))
+      const imgs = Array.from(document.querySelectorAll('[data-journey] img'))
       const pending = imgs.filter((img) => !img.complete)
       if (!pending.length) return Promise.resolve()
       return Promise.all(
@@ -167,12 +219,17 @@ export default function ScrollJourney() {
     window.addEventListener('scroll', measure, { passive: true })
     window.addEventListener('resize', measure, { passive: true })
 
-    waitForImages().then(refreshGeometry)
+    waitForImages().then(() => {
+      if (!disposed) refreshGeometry()
+    })
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(refreshGeometry)
+      document.fonts.ready.then(() => {
+        if (!disposed) refreshGeometry()
+      })
     }
 
     return () => {
+      disposed = true
       if (rafId !== null) cancelAnimationFrame(rafId)
       ro.disconnect()
       window.removeEventListener('scroll', measure)

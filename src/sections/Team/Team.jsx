@@ -1,20 +1,17 @@
 import { useState } from 'react'
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules'
-import { Swiper as SwiperCore } from 'swiper'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import SectionHeader from '../../components/SectionHeader'
+import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import Reveal from '../../components/Reveal'
-import Node from '../../components/Node'
-import { IconChevronLeft, IconChevronRight } from '../../components/icons'
+import Node from '../../components/Node/Node'
 import { TEAM, TEAM_HEADER } from '../../data/content'
 import './Team.css'
-
-SwiperCore.use([Navigation, Pagination, Keyboard, A11y])
 
 function MemberCard({ member }) {
   const [error, setError] = useState(false)
@@ -83,14 +80,14 @@ export default function Team() {
               className="team__nav-btn team__nav-btn--prev"
               aria-label="Integrantes anteriores"
             >
-              <IconChevronLeft size={20} strokeWidth={2} />
+              <LuChevronLeft size={20} strokeWidth={2} />
             </button>
             <button
               type="button"
               className="team__nav-btn team__nav-btn--next"
               aria-label="Próximos integrantes"
             >
-              <IconChevronRight size={20} strokeWidth={2} />
+              <LuChevronRight size={20} strokeWidth={2} />
             </button>
           </Reveal>
         </div>

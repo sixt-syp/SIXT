@@ -63,10 +63,6 @@
   animation: sixt-pulse 2.8s ease-in-out infinite;
 }
 
-/* ---------------------------------------------------------
-   Linha de conexão entre dois nodes
-   --------------------------------------------------------- */
-
 .dotline {
   display: inline-flex;
   align-items: center;

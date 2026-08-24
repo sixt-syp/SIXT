@@ -1,6 +1,6 @@
-import SectionHeader from '../../components/SectionHeader'
+import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import Reveal from '../../components/Reveal'
-import Node from '../../components/Node'
+import Node from '../../components/Node/Node'
 import { MOVEMENT_STEPS, MOVEMENT_HEADER } from '../../data/content'
 import './Movement.css'
 

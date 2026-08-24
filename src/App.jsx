@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import ScrollJourney from './components/ScrollJourney'
+import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
+import ScrollJourney from './components/ScrollJourney/ScrollJourney'
 import { ScrollTrigger } from './lib/gsap'
 import Hero from './sections/Hero/Hero'
 import Services from './sections/Services/Services'
@@ -9,7 +9,6 @@ import Movement from './sections/Movement/Movement'
 import Manifesto from './sections/Manifesto/Manifesto'
 import Team from './sections/Team/Team'
 import Contact from './sections/Contact/Contact'
-import './App.css'
 
 export default function App() {
   useEffect(() => {

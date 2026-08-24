@@ -1,4 +1,4 @@
-import Reveal from './Reveal'
+import Reveal from '../Reveal'
 import './SectionHeader.css'
 
 export default function SectionHeader({ label, title, description, split = false, id }) {

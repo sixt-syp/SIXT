@@ -7,9 +7,6 @@ import alissonImg from '../assets/team/alisson.jpg'
 
 export const TAGLINE = 'Entender antes de criar.'
 
-export const PROMISE =
-  'Criamos uma presença digital profissional, alinhada ao seu negócio e preparada para gerar oportunidades.'
-
 export const NAV_LINKS = [
   { label: 'Sobre', href: '#sobre' },
   { label: 'Serviços', href: '#servicos' },
@@ -147,20 +144,6 @@ export const TEAM_HEADER = {
     'Diferentes conhecimentos, um mesmo jeito de trabalhar: entender primeiro, criar depois.',
 }
 
-export const CONTACT = {
-  titlePlain: 'VAMOS ',
-  titleAccent: 'CONVERSAR.',
-  description:
-    'Conte como o seu negócio funciona hoje. A gente ajuda a descobrir o que realmente precisa ser resolvido — e a melhor forma de resolver.',
-  cta: 'Começar meu projeto',
-}
-
-export const FOOTER = {
-  description:
-    'Soluções digitais orientadas ao negócio: branding, sites e tecnologia para micro e pequenas empresas.',
-  signature: 'Entender antes de criar.',
-}
-
 export const TEAM = [
   {
     name: 'Pedro Brito de Matos',
@@ -206,6 +189,20 @@ export const TEAM = [
     github: 'https://github.com/AlissonGCosta',
   },
 ]
+
+export const CONTACT = {
+  titlePlain: 'VAMOS ',
+  titleAccent: 'CONVERSAR.',
+  description:
+    'Conte como o seu negócio funciona hoje. A gente ajuda a descobrir o que realmente precisa ser resolvido — e a melhor forma de resolver.',
+  cta: 'Começar meu projeto',
+}
+
+export const FOOTER = {
+  description:
+    'Soluções digitais orientadas ao negócio: branding, sites e tecnologia para micro e pequenas empresas.',
+  signature: 'Entender antes de criar.',
+}
 
 export const SOCIALS = [
   {

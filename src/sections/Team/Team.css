@@ -1,7 +1,4 @@
-/* ---------------------------------------------------------
-   Cabeçalho da seção + navegação do carrossel
-   --------------------------------------------------------- */
-
+/* Cabeçalho + navegação do carrossel */
 .team__header-row {
   display: flex;
   flex-wrap: wrap;
@@ -57,10 +54,7 @@
   pointer-events: none;
 }
 
-/* ---------------------------------------------------------
-   Carrossel
-   --------------------------------------------------------- */
-
+/* Carrossel */
 .team__carousel {
   /* respiro para o lift dos cards sem cortar o overflow */
   padding: 10px;
@@ -76,10 +70,7 @@
   width: 100%;
 }
 
-/* ---------------------------------------------------------
-   Cards
-   --------------------------------------------------------- */
-
+/* Cards */
 .member {
   height: 100%;
   display: flex;
@@ -196,10 +187,7 @@
   opacity: 1;
 }
 
-/* ---------------------------------------------------------
-   Paginação
-   --------------------------------------------------------- */
-
+/* Paginação */
 .team__pagination {
   display: flex;
   justify-content: center;

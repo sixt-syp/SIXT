@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { NAV_LINKS } from '../data/content'
-import { IconClose, IconMenu } from './icons'
-import Node from './Node'
-import logoSvg from '../assets/illustrations/logo.svg'
+import { LuMenu, LuX } from 'react-icons/lu'
+import Button from '../Button/Button'
+import { NAV_LINKS } from '../../data/content'
+import Node from '../Node/Node'
+import logoSvg from '../../assets/illustrations/logo.svg'
 import './Navbar.css'
 
 export default function Navbar() {
@@ -77,9 +78,9 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__actions">
-          <a href="#contato" className="btn btn--secondary btn--sm nav__cta">
+          <Button href="#contato" variant="secondary" size="sm" className="nav__cta">
             Vamos conversar
-          </a>
+          </Button>
 
           <button
             ref={menuButtonRef}
@@ -90,7 +91,7 @@ export default function Navbar() {
             aria-label={open ? 'Fechar menu' : 'Abrir menu'}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <IconClose size={26} /> : <IconMenu size={26} />}
+            {open ? <LuX size={26} /> : <LuMenu size={26} />}
           </button>
         </div>
       </div>
@@ -119,14 +120,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <a
-          href="#contato"
-          className="btn btn--primary btn--md"
-          onClick={closeMenu}
-          tabIndex={open ? 0 : -1}
-        >
+        <Button href="#contato" onClick={closeMenu} tabIndex={open ? 0 : -1}>
           [ Vamos conversar ]
-        </a>
+        </Button>
       </div>
     </header>
   )

@@ -1,9 +1,17 @@
 import { useState } from 'react'
-import SectionHeader from '../../components/SectionHeader'
+import { LuAppWindow, LuArrowUpRight, LuCompass, LuPalette, LuRefreshCw } from 'react-icons/lu'
+import Button from '../../components/Button/Button'
+import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import Reveal from '../../components/Reveal'
-import { IconArrowUpRight, SERVICE_ICONS } from '../../components/icons'
 import { SERVICES, SERVICES_HEADER } from '../../data/content'
 import './Services.css'
+
+const SERVICE_ICONS = {
+  strategy: LuCompass,
+  palette: LuPalette,
+  browser: LuAppWindow,
+  refresh: LuRefreshCw,
+}
 
 export default function Services() {
   const [openNumber, setOpenNumber] = useState(SERVICES[0].number)
@@ -92,10 +100,10 @@ export default function Services() {
 
         <Reveal className="services__more" delay={120}>
           <p>Seu caso não se encaixa em nada disso?</p>
-          <a href="#contato" className="btn btn--secondary btn--md">
+          <Button href="#contato" variant="secondary">
             Quero entender
-            <IconArrowUpRight size={16} strokeWidth={2} />
-          </a>
+            <LuArrowUpRight size={16} strokeWidth={2} />
+          </Button>
         </Reveal>
       </div>
     </section>

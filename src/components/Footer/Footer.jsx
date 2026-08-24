@@ -1,8 +1,10 @@
-import Reveal from './Reveal'
-import Node from './Node'
-import { IconArrowUpRight } from './icons'
-import { NAV_LINKS, SERVICES, SOCIALS, TAGLINE, FOOTER } from '../data/content'
-import logoSvg from '../assets/illustrations/logo.svg'
+import { LuArrowUpRight } from 'react-icons/lu'
+import Reveal from '../Reveal'
+import Button from '../Button/Button'
+import ExternalLink from '../ExternalLink'
+import Node from '../Node/Node'
+import { NAV_LINKS, SERVICES, SOCIALS, TAGLINE, FOOTER } from '../../data/content'
+import logoSvg from '../../assets/illustrations/logo.svg'
 import './Footer.css'
 
 const EXPLORE = [
@@ -23,12 +25,11 @@ function LinkColumn({ label, links, listName }) {
       <ul className="footer__links">
         {links.map((link) => (
           <li key={link.label}>
-            <a
-              href={link.href}
-              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {link.label}
-            </a>
+            {link.external ? (
+              <ExternalLink href={link.href}>{link.label}</ExternalLink>
+            ) : (
+              <a href={link.href}>{link.label}</a>
+            )}
           </li>
         ))}
       </ul>
@@ -57,14 +58,11 @@ export default function Footer() {
             <ul className="footer__links">
               {SOCIALS.map((social) => (
                 <li key={social.label}>
-                  <a
-                    href={social.href}
-                    {...(social.external
-                      ? { target: '_blank', rel: 'noopener noreferrer' }
-                      : {})}
-                  >
-                    {social.label}
-                  </a>
+                  {social.external ? (
+                    <ExternalLink href={social.href}>{social.label}</ExternalLink>
+                  ) : (
+                    <a href={social.href}>{social.label}</a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -76,10 +74,10 @@ export default function Footer() {
             <span className="footer__heading">Próximo passo</span>
             <p>Vamos tirar isso do papel?</p>
           </div>
-          <a href="mailto:codesixtech@gmail.com" className="btn btn--primary btn--lg">
+          <Button href="mailto:codesixtech@gmail.com" size="lg">
             Começar meu projeto
-            <IconArrowUpRight size={18} strokeWidth={2} />
-          </a>
+            <LuArrowUpRight size={18} strokeWidth={2} />
+          </Button>
         </Reveal>
 
         <div className="footer__rule-wrap">

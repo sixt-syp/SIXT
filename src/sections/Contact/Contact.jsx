@@ -1,6 +1,8 @@
+import { LuArrowUpRight } from 'react-icons/lu'
+import Button from '../../components/Button/Button'
+import ExternalLink from '../../components/ExternalLink'
 import Reveal from '../../components/Reveal'
-import Node from '../../components/Node'
-import { IconArrowUpRight } from '../../components/icons'
+import Node from '../../components/Node/Node'
 import { SOCIALS, CONTACT } from '../../data/content'
 import './Contact.css'
 
@@ -27,23 +29,20 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={240} className="contact__actions">
-          <a href="mailto:codesixtech@gmail.com" className="btn btn--primary btn--md">
+          <Button href="mailto:codesixtech@gmail.com">
             {CONTACT.cta}
-            <IconArrowUpRight size={16} strokeWidth={2} />
-          </a>
+            <LuArrowUpRight size={16} strokeWidth={2} />
+          </Button>
         </Reveal>
 
         <ul className="contact__links">
           {SOCIALS.map((social, i) => (
             <Reveal as="li" key={social.label} delay={300 + i * 80}>
-              <a
-                href={social.href}
-                {...(social.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              >
+              <ExternalLink href={social.href}>
                 <Node variant="dot" size={8} />
                 <span>{social.label}</span>
-                <IconArrowUpRight size={18} strokeWidth={1.75} className="contact__arrow" />
-              </a>
+                <LuArrowUpRight size={18} strokeWidth={1.75} className="contact__arrow" />
+              </ExternalLink>
             </Reveal>
           ))}
         </ul>
