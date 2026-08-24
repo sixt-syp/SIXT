@@ -21,7 +21,6 @@ Landing page institucional da **SIXT**, reconstruída como uma aplicação **Rea
 11. [Responsividade](#responsividade)
 12. [Como rodar](#como-rodar)
 13. [Conteúdo editável](#conteúdo-editável)
-14. [Legado](#legado)
 
 ---
 
@@ -125,7 +124,6 @@ sixt-landing/
 ├── index.html                  # Entrada (fontes Google, favicon SVG)
 ├── package.json
 ├── vite.config.js
-├── SIXT/                       # Projeto legado preservado
 └── src/
     ├── main.jsx                # Bootstrap + ordem de estilos
     ├── App.jsx                 # Composição: Navbar → main → Footer
