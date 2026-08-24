@@ -1,7 +1,10 @@
 import Reveal from '../../components/Reveal'
 import Node from '../../components/Node/Node'
-import { MANIFESTO } from '../../data/content'
+import Marquee from '../../components/Marquee/Marquee'
+import { MANIFESTO, PILLARS } from '../../data/content'
 import './Manifesto.css'
+
+const MARQUEE_ITEMS = PILLARS.map((pillar) => pillar.label)
 
 export default function Manifesto() {
   return (
@@ -39,6 +42,8 @@ export default function Manifesto() {
           ))}
         </Reveal>
       </div>
+
+      <Marquee items={MARQUEE_ITEMS} className="manifesto__marquee" speed={30} />
     </section>
   )
 }

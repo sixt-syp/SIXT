@@ -1,12 +1,24 @@
 import Reveal from '../Reveal'
 import './SectionHeader.css'
 
-export default function SectionHeader({ label, title, description, split = false, id }) {
+export default function SectionHeader({
+  label,
+  title,
+  description,
+  split = false,
+  centered = false,
+  id,
+}) {
+  const classes = [
+    'sec-header',
+    split ? 'sec-header--split' : '',
+    centered ? 'sec-header--centered' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <Reveal
-      as="header"
-      className={`sec-header ${split ? 'sec-header--split' : ''}`.trim()}
-    >
+    <Reveal as="header" className={classes}>
       <div>
         <span className="section-label" data-label={label}>
           {label}

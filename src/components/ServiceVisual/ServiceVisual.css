@@ -1,0 +1,232 @@
+.sv {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-theme, var(--border-light));
+  background: var(--neutral-50);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.section--dark .sv {
+  background: var(--neutral-950);
+}
+
+/* Malha de fundo */
+.sv__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(138, 0, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(138, 0, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 78%);
+}
+
+.sv svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* O painel inteiro reage ao hover do bloco pai */
+.svc-block:hover .sv {
+  border-color: var(--purple-line);
+}
+
+/* — Diagnóstico — */
+.sv-scan__rings circle {
+  fill: none;
+  stroke: var(--purple);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.sv-scan__axis {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.12;
+}
+
+.sv-scan__sweep {
+  transform-origin: 160px 120px;
+  animation: sixt-sweep 6s linear infinite;
+}
+
+.sv-scan__sweep line {
+  stroke: var(--purple);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+.sv-scan__core {
+  fill: var(--purple);
+}
+
+.sv-scan__hit {
+  fill: var(--purple-bright);
+}
+
+.sv-scan__hit--a {
+  animation: sixt-blip 3.2s ease-in-out infinite;
+}
+
+.sv-scan__hit--b {
+  animation: sixt-blip 3.2s ease-in-out 1.4s infinite;
+}
+
+/* — Identidade — */
+.sv-brand__glyph {
+  font-family: var(--font-heading);
+  font-size: 132px;
+  font-weight: 700;
+  fill: var(--purple);
+  opacity: 0.9;
+}
+
+.sv-brand__swatches rect {
+  fill: var(--purple);
+}
+
+.sv-brand__swatches rect:nth-child(2) {
+  opacity: 0.72;
+}
+
+.sv-brand__swatches rect:nth-child(3) {
+  opacity: 0.48;
+}
+
+.sv-brand__swatches rect:nth-child(4) {
+  opacity: 0.26;
+}
+
+.svc-block:hover .sv-brand__swatches rect {
+  animation: sixt-swatch 1.6s var(--ease-out) both;
+}
+
+.svc-block:hover .sv-brand__swatches rect:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.svc-block:hover .sv-brand__swatches rect:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.svc-block:hover .sv-brand__swatches rect:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.sv-brand__rules line,
+.sv-brand__baseline {
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.18;
+  stroke-linecap: round;
+}
+
+.sv-brand__baseline {
+  stroke: var(--purple);
+  opacity: 0.5;
+}
+
+/* — Sites — */
+.sv-site__frame {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.22;
+}
+
+.sv-site__chrome {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.16;
+}
+
+.sv-site__dots circle {
+  fill: currentColor;
+  opacity: 0.25;
+}
+
+.sv-site__hero {
+  fill: var(--purple);
+  opacity: 0.18;
+  transition: opacity var(--dur-slow) ease;
+}
+
+.svc-block:hover .sv-site__hero {
+  opacity: 0.34;
+}
+
+.sv-site__lines rect {
+  fill: currentColor;
+  opacity: 0.14;
+}
+
+.sv-site__cta {
+  fill: var(--purple);
+}
+
+/* — Automações — */
+.sv-flow__path {
+  stroke: var(--purple);
+  stroke-width: 1.5;
+  opacity: 0.35;
+  stroke-linecap: round;
+}
+
+.sv-flow__pulse {
+  fill: var(--purple-bright);
+}
+
+.sv-flow__nodes rect {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.28;
+}
+
+.sv-flow__hub rect {
+  fill: var(--purple);
+  opacity: 0.9;
+}
+
+@keyframes sixt-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sixt-blip {
+  0%,
+  100% {
+    opacity: 0.25;
+    r: 4;
+  }
+  50% {
+    opacity: 1;
+    r: 6;
+  }
+}
+
+@keyframes sixt-swatch {
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sv-scan__sweep,
+  .sv-scan__hit--a,
+  .sv-scan__hit--b,
+  .svc-block:hover .sv-brand__swatches rect {
+    animation: none;
+  }
+
+  .sv-flow__pulse {
+    display: none;
+  }
+}

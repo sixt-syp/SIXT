@@ -2,6 +2,12 @@
   overflow: hidden;
 }
 
+/* A seção tem o padding no __inner, então a faixa entra colada na base */
+.manifesto__marquee {
+  border-bottom: none;
+  color: var(--text-on-light);
+}
+
 .manifesto__title {
   display: flex;
   flex-direction: column;

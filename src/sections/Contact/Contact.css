@@ -2,13 +2,109 @@
   overflow: hidden;
 }
 
+/* Bloco dividido: painel à esquerda, conteúdo à direita */
 .contact__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--sp-6), 6vw, 88px);
+}
+
+.contact__media {
+  min-width: 0;
+}
+
+/* Painel com órbitas — o placeholder de imagem do wireframe */
+.contact__visual {
   position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  background:
+    radial-gradient(circle at 50% 50%, var(--purple-tint-08), transparent 62%),
+    var(--white);
+  overflow: hidden;
+}
+
+.contact__orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--purple-line);
+  opacity: 0.55;
+}
+
+.contact__orbit--lg {
+  width: 92%;
+  height: 92%;
+  animation: sixt-orbit 34s linear infinite;
+}
+
+.contact__orbit--md {
+  width: 66%;
+  height: 66%;
+  opacity: 0.75;
+}
+
+.contact__orbit--sm {
+  width: 40%;
+  height: 40%;
+  border-style: dashed;
+  animation: sixt-orbit 22s linear infinite reverse;
+}
+
+/* Satélites nas órbitas */
+.contact__sat {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.contact__sat--a {
+  width: 92%;
+  height: 92%;
+  animation: sixt-orbit 18s linear infinite;
+}
+
+.contact__sat--a .node {
+  position: absolute;
+  top: -4px;
+}
+
+.contact__sat--b {
+  width: 66%;
+  height: 66%;
+  animation: sixt-orbit 26s linear infinite reverse;
+}
+
+.contact__sat--b .node {
+  position: absolute;
+  bottom: -3px;
+}
+
+.contact__visual-text {
+  position: relative;
+  z-index: 2;
+  max-width: 10ch;
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 0.9rem + 1.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--ls-heading);
+  text-align: center;
+  color: var(--text-on-light);
+}
+
+/* Conteúdo */
+.contact__body {
+  min-width: 0;
 }
 
 .contact__title {
-  font-size: var(--fs-display);
-  line-height: var(--lh-display);
+  font-size: clamp(2rem, 1.4rem + 3.4vw, 4rem);
+  line-height: 1.06;
   letter-spacing: -0.04em;
 }
 
@@ -18,58 +114,105 @@
 
 .contact__desc {
   margin-top: var(--sp-4);
-  max-width: 46ch;
+  max-width: 48ch;
   font-size: var(--fs-body-1);
   line-height: var(--lh-body-1);
   color: var(--text-soft);
 }
 
-.contact__actions {
+.contact__bullets {
+  display: grid;
+  gap: var(--sp-3);
   margin-top: var(--sp-6);
 }
 
-/* Lista editorial de canais */
+.contact__bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  font-size: var(--fs-body-2);
+  line-height: var(--lh-body-2);
+  color: var(--text-on-light);
+}
+
+.contact__bullets svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--purple);
+}
+
+.contact__actions {
+  margin-top: clamp(var(--sp-6), 5vw, var(--sp-7));
+}
+
+/* Links sociais */
 .contact__links {
-  margin-top: clamp(var(--sp-7), 7vw, 80px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: clamp(var(--sp-6), 5vw, var(--sp-7));
+  padding-top: var(--sp-5);
   border-top: 1px solid var(--border-light);
 }
 
 .contact__links a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--sp-4);
-  padding-block: var(--sp-4);
-  border-bottom: 1px solid var(--border-light);
-  font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  font-size: var(--fs-body-3);
   font-weight: 600;
-  letter-spacing: var(--ls-heading);
+  letter-spacing: 0.04em;
+  color: var(--text-on-light);
   transition:
-    padding-left var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) ease;
+    border-color var(--dur-fast) ease,
+    background var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease-spring);
 }
 
 .contact__links a:hover {
+  border-color: var(--purple-line-strong);
+  background: var(--purple-tint-04);
   color: var(--purple);
-  padding-left: var(--sp-2);
-}
-
-.contact__links .node {
-  transition: scale var(--dur-base) var(--ease-out);
-}
-
-.contact__links a:hover .node {
-  scale: 1.5;
+  transform: translate3d(0, -2px, 0);
 }
 
 .contact__arrow {
-  margin-left: auto;
-  opacity: 0.35;
-  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 
 .contact__links a:hover .contact__arrow {
-  opacity: 1;
-  transform: translate3d(3px, -3px, 0);
+  transform: translate3d(2px, -2px, 0);
+}
+
+@keyframes sixt-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  .contact__visual {
+    aspect-ratio: 16 / 10;
+    max-width: 520px;
+  }
+
+  .contact__desc {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__orbit,
+  .contact__sat {
+    animation: none;
+  }
 }

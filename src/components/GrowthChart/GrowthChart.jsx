@@ -16,6 +16,15 @@ const POINTS_DATA = [
   { x: W - PAD_X, y: 84, label: 'IMPACTO' },
 ]
 
+/* O balão é centrado no ponto ativo; nas extremidades isso o jogaria
+   para fora do SVG, então a posição é limitada à área visível. */
+function clampTooltipX(point) {
+  const halfWidth = (point.label.length * 8.8 + 28) / 2
+  const min = halfWidth + 6
+  const max = W - halfWidth - 6
+  return Math.min(Math.max(point.x, min), max)
+}
+
 function smoothPath(pts) {
   let d = `M ${pts[0].x} ${pts[0].y}`
   for (let i = 1; i < pts.length; i++) {
@@ -171,7 +180,7 @@ export default function GrowthChart() {
 
         <g
           className={`gchart__tooltip ${drawn ? 'is-visible' : ''}`}
-          transform={`translate(${activePoint.x}, ${activePoint.y - 22})`}
+          transform={`translate(${clampTooltipX(activePoint)}, ${activePoint.y - 22})`}
         >
           <rect
             x={-(activePoint.label.length * 4.4 + 14)}

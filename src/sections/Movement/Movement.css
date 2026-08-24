@@ -2,94 +2,184 @@
   overflow: hidden;
 }
 
-.movement__timeline {
+/* Trilha horizontal com os cinco passos, como na faixa do wireframe */
+.movement__rail {
+  --mv-disc: clamp(68px, 7vw, 92px);
+
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(var(--sp-7), 8vw, 88px);
-  max-width: 880px;
-  margin-inline: auto;
-  padding-left: var(--sp-6);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin-top: clamp(var(--sp-6), 6vw, var(--sp-8));
 }
 
-/* Trilho vertical */
-.movement__timeline::before {
-  content: '';
+/* Linha que conecta os discos */
+.movement__track {
   position: absolute;
-  top: 8px;
-  bottom: 8px;
-  left: 15px;
-  width: 1.5px;
-  background: linear-gradient(
-    180deg,
-    rgba(138, 0, 255, 0.05),
-    rgba(138, 0, 255, 0.5) 30%,
-    rgba(138, 0, 255, 0.5) 70%,
-    var(--purple)
-  );
+  top: calc(var(--mv-disc) / 2);
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--neutral-800);
+}
+
+.movement__track-fill {
+  --mv-fill: 0;
+
+  display: block;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(var(--mv-fill));
+  background: linear-gradient(90deg, var(--purple-dark), var(--purple));
 }
 
 .mv {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: var(--sp-6);
-}
-
-.mv__marker {
-  position: absolute;
-  left: calc(var(--sp-6) * -1);
-  top: 4px;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  width: 32px;
+  text-align: center;
+  min-width: 0;
 }
 
-.mv__pair {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+/* Disco numerado */
+.mv__disc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--mv-disc);
+  height: var(--mv-disc);
+  border-radius: 50%;
+  border: 1px solid var(--neutral-700);
+  background: var(--neutral-950);
+  transition:
+    border-color var(--dur-base) ease,
+    background var(--dur-base) ease,
+    box-shadow var(--dur-base) ease,
+    transform var(--dur-base) var(--ease-spring);
 }
 
-.mv__connector {
-  width: 1px;
-  height: clamp(var(--sp-7), 8vw, 88px);
-  margin-top: var(--sp-3);
-  background: linear-gradient(180deg, rgba(138, 0, 255, 0.5), transparent);
+.mv__disc.is-on {
+  border-color: var(--purple);
+  background: var(--neutral-900);
+  box-shadow: var(--glow-sm);
 }
 
-.mv__body {
-  max-width: 46ch;
+.mv:hover .mv__disc {
+  transform: translate3d(0, -5px, 0);
 }
 
-.mv--right .mv__body {
-  margin-left: auto;
-  text-align: right;
+.mv__step {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--neutral-500);
+  transition: color var(--dur-base) ease;
 }
 
-@media (max-width: 720px) {
-  .mv--right .mv__body {
-    margin-left: 0;
-    text-align: left;
-  }
-}
-
-.mv__label {
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
-  letter-spacing: var(--ls-heading);
-  text-transform: uppercase;
+.mv__disc.is-on .mv__step {
   color: var(--white);
 }
 
-.mv:last-child .mv__label {
-  color: var(--purple-bright);
+/* Nó do sistema visual, abaixo do número */
+.mv__node {
+  position: absolute;
+  bottom: 14px;
+  display: inline-flex;
+  opacity: 0.35;
+  transition: opacity var(--dur-base) ease;
+}
+
+.mv__disc.is-on .mv__node {
+  opacity: 1;
+}
+
+.mv__pair {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.mv__label {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
 }
 
 .mv__text {
-  margin-top: var(--sp-3);
-  font-size: var(--fs-body-1);
-  line-height: var(--lh-body-1);
+  margin-top: var(--sp-2);
+  max-width: 28ch;
+  font-size: var(--fs-body-3);
+  line-height: var(--lh-body-2);
   color: var(--text-on-dark-soft);
+}
+
+.movement__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(var(--sp-7), 7vw, 88px);
+}
+
+/* Abaixo de 900px a trilha vira vertical */
+@media (max-width: 900px) {
+  .movement__rail {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+    padding-left: calc(var(--mv-disc) / 2);
+  }
+
+  .movement__track {
+    top: calc(var(--mv-disc) / 2);
+    bottom: calc(var(--mv-disc) / 2);
+    left: 0;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .movement__track-fill {
+    width: 100%;
+    height: 100%;
+    transform-origin: top center;
+    transform: scaleY(var(--mv-fill));
+    background: linear-gradient(180deg, var(--purple-dark), var(--purple));
+  }
+
+  .mv {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--sp-4);
+    text-align: left;
+  }
+
+  .mv__disc {
+    flex-shrink: 0;
+    margin-left: calc(var(--mv-disc) / -2);
+  }
+
+  .mv__label {
+    margin-top: 0;
+  }
+
+  .mv__text {
+    max-width: 46ch;
+  }
+
+  /* O texto precisa ocupar a coluna ao lado do disco */
+  .mv > h3,
+  .mv > p {
+    align-self: flex-start;
+  }
+
+  .mv {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: var(--sp-4);
+    row-gap: var(--sp-1);
+  }
+
+  .mv__disc {
+    grid-row: 1 / span 2;
+  }
 }

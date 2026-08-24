@@ -1,0 +1,11 @@
+.magnetic {
+  display: inline-flex;
+}
+
+.magnetic > * {
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+
+.magnetic:hover > * {
+  transition: transform 0.12s linear;
+}

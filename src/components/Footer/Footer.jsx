@@ -2,15 +2,17 @@ import { LuArrowUpRight } from 'react-icons/lu'
 import Reveal from '../Reveal'
 import Button from '../Button/Button'
 import ExternalLink from '../ExternalLink'
+import Magnetic from '../Magnetic/Magnetic'
 import Node from '../Node/Node'
-import { NAV_LINKS, SERVICES, SOCIALS, TAGLINE, FOOTER } from '../../data/content'
+import { SERVICES, SOCIALS, TAGLINE, FOOTER } from '../../data/content'
 import logoSvg from '../../assets/illustrations/logo.svg'
 import './Footer.css'
 
 const EXPLORE = [
   { label: 'Início', href: '#inicio' },
-  ...NAV_LINKS,
-  { label: 'Metodologia', href: '#movimento' },
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Equipe', href: '#equipe' },
+  { label: 'Contato', href: '#contato' },
 ]
 
 const SERVICE_LINKS = SERVICES.map((service) => ({
@@ -45,45 +47,34 @@ export default function Footer() {
       <div className="container">
         <Reveal className="footer__top">
           <div className="footer__brand">
-            <img src={logoSvg} alt="SIXT" className="footer__logo-img" width="52" height="41" />
             <p className="footer__tagline">{TAGLINE}</p>
             <p className="footer__desc">{FOOTER.description}</p>
           </div>
 
           <LinkColumn label="Explore" listName="Navegação do rodapé" links={EXPLORE} />
           <LinkColumn label="Serviços" listName="Serviços no rodapé" links={SERVICE_LINKS} />
-
-          <div className="footer__col">
-            <h3 className="footer__heading">Fale com a SIXT</h3>
-            <ul className="footer__links">
-              {SOCIALS.map((social) => (
-                <li key={social.label}>
-                  {social.external ? (
-                    <ExternalLink href={social.href}>{social.label}</ExternalLink>
-                  ) : (
-                    <a href={social.href}>{social.label}</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-
-        <Reveal className="footer__cta" delay={120}>
-          <div className="footer__cta-label">
-            <span className="footer__heading">Próximo passo</span>
-            <p>Vamos tirar isso do papel?</p>
-          </div>
-          <Button href="mailto:codesixtech@gmail.com" size="lg">
-            Começar meu projeto
-            <LuArrowUpRight size={18} strokeWidth={2} />
-          </Button>
+          <LinkColumn label="Contato" listName="Contatos no rodapé" links={SOCIALS} />
         </Reveal>
 
         <div className="footer__rule-wrap">
           <span className="footer__rule" aria-hidden="true">
             <Node variant="dot" size={7} className="footer__rule-dot" />
           </span>
+        </div>
+
+        {/* Base: marca à esquerda, ação à direita — como no wireframe */}
+        <div className="footer__baseline">
+          <a href="#inicio" className="footer__mark" aria-label="SIXT — voltar ao início">
+            <img src={logoSvg} alt="" className="footer__logo-img" width="52" height="41" />
+            <span className="footer__mark-name">SIX Technology</span>
+          </a>
+
+          <Magnetic>
+            <Button href="mailto:codesixtech@gmail.com">
+              Começar meu projeto
+              <LuArrowUpRight size={16} strokeWidth={2} />
+            </Button>
+          </Magnetic>
         </div>
 
         <div className="footer__legal">
