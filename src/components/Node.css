@@ -1,10 +1,3 @@
-/* =========================================================
-   SIXT — SISTEMA DE NODES
-   ●  ponto        .node--dot
-   ◉  núcleo       .node--core
-   ◎  anel duplo   .node--ring
-   --------------------------------------------------------- */
-
 .node {
   --node-size: 10px;
 
