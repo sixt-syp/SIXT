@@ -1,0 +1,28 @@
+.sec-header {
+  display: grid;
+  gap: var(--sp-5);
+  margin-bottom: clamp(var(--sp-7), 8vw, 96px);
+}
+
+@media (min-width: 900px) {
+  .sec-header--split {
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: var(--sp-9);
+    align-items: end;
+  }
+
+  .sec-header--split .sec-header__desc {
+    padding-bottom: var(--sp-2);
+  }
+}
+
+.sec-header__title {
+  max-width: 18ch;
+}
+
+.sec-header__desc {
+  font-size: var(--fs-body-1);
+  line-height: var(--lh-body-1);
+  color: var(--text-soft);
+  max-width: 44ch;
+}

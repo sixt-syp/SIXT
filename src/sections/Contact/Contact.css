@@ -1,0 +1,75 @@
+.contact {
+  overflow: hidden;
+}
+
+.contact__inner {
+  position: relative;
+}
+
+.contact__title {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: -0.04em;
+}
+
+.contact__title span {
+  color: var(--purple);
+}
+
+.contact__desc {
+  margin-top: var(--sp-4);
+  max-width: 46ch;
+  font-size: var(--fs-body-1);
+  line-height: var(--lh-body-1);
+  color: var(--text-soft);
+}
+
+.contact__actions {
+  margin-top: var(--sp-6);
+}
+
+/* Lista editorial de canais */
+.contact__links {
+  margin-top: clamp(var(--sp-7), 7vw, 80px);
+  border-top: 1px solid var(--border-light);
+}
+
+.contact__links a {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  border-bottom: 1px solid var(--border-light);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 600;
+  letter-spacing: var(--ls-heading);
+  transition:
+    padding-left var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) ease;
+}
+
+.contact__links a:hover {
+  color: var(--purple);
+  padding-left: var(--sp-2);
+}
+
+.contact__links .node {
+  transition: scale var(--dur-base) var(--ease-out);
+}
+
+.contact__links a:hover .node {
+  scale: 1.5;
+}
+
+.contact__arrow {
+  margin-left: auto;
+  opacity: 0.35;
+  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
+}
+
+.contact__links a:hover .contact__arrow {
+  opacity: 1;
+  transform: translate3d(3px, -3px, 0);
+}

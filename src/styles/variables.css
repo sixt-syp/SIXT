@@ -1,0 +1,92 @@
+
+
+:root {
+
+   /* Cores — Primary */
+  --black: #000000;
+  --purple: #8a00ff;
+  --white: #ffffff;
+
+  /* Cores — Secondary */
+  --purple-dark: #5c00b8;
+  --purple-bright: #a94dff;
+  --purple-soft: #d9b3ff;
+
+  /* Cores — Neutrals */
+  --neutral-950: #080808;
+  --neutral-900: #111111;
+  --neutral-800: #1a1a1a;
+  --neutral-700: #292929;
+  --neutral-500: #666666;
+  --neutral-300: #b8b8b8;
+  --neutral-100: #eaeaea;
+  --neutral-50: #f7f7f7;
+
+  /* Semântica — superfícies */
+  --bg-dark: var(--black);
+  --bg-light: var(--white);
+
+  --text-on-dark: var(--white);
+  --text-on-dark-soft: var(--neutral-300);
+  --text-on-light: var(--neutral-950);
+  --text-on-light-soft: var(--neutral-500);
+
+  --border-dark: var(--neutral-800);
+  --border-light: var(--neutral-100);
+
+  /* Tipografia */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  --ls-heading: -0.03em;
+
+  /* Desktop → Mobile via clamp */
+  --fs-h1: clamp(1.75rem, 1rem + 4vw, 4rem);        /* 64px / 28px */
+  --lh-h1: 1.19;
+  --fs-h2: clamp(1.25rem, 1.05rem + 1.35vw, 2.25rem); /* 36px / 20px */
+  --lh-h2: 1.22;
+  --fs-h3: clamp(1.125rem, 1rem + 0.75vw, 1.75rem);   /* 28px / 18px */
+  --lh-h3: 1.29;
+  --fs-h4: clamp(1rem, 0.95rem + 0.3vw, 1.25rem);     /* 20px / 16px */
+  --lh-h4: 1.4;
+
+  --fs-display: clamp(2.5rem, 1.6rem + 5vw, 5.75rem);
+  --lh-display: 1.04;
+
+  --fs-body-1: clamp(1rem, 0.94rem + 0.35vw, 1.125rem); /* 18px / 16px */
+  --lh-body-1: 1.56;
+  --fs-body-2: clamp(0.875rem, 0.84rem + 0.2vw, 1rem);  /* 16px / 14px */
+  --lh-body-2: 1.55;
+  --fs-body-3: clamp(0.75rem, 0.72rem + 0.15vw, 0.875rem); /* 14px / 12px */
+  --lh-body-3: 1.45;
+
+  /* Espaçamento — base 8 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 40px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 80px;
+  --sp-10: 96px;
+
+  --section-pad: clamp(var(--sp-9), 14vw, 160px);
+
+  /* Grid */
+  --container-max: 1240px;
+  --container-pad: clamp(20px, 5vw, 64px);
+
+  /* Formas & Motion */
+  --radius-btn: 12px;
+  --radius-card: 18px;
+
+  --dur-fast: 0.25s;
+  --dur-base: 0.45s;
+  --dur-slow: 0.8s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Journey (círculo do scroll) */
+  --journey-dot-size: clamp(14px, 1.4vw, 22px);
+}

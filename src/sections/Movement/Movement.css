@@ -1,0 +1,95 @@
+.movement {
+  overflow: hidden;
+}
+
+.movement__timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--sp-7), 8vw, 88px);
+  max-width: 880px;
+  margin-inline: auto;
+  padding-left: var(--sp-6);
+}
+
+/* Trilho vertical */
+.movement__timeline::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 15px;
+  width: 1.5px;
+  background: linear-gradient(
+    180deg,
+    rgba(138, 0, 255, 0.05),
+    rgba(138, 0, 255, 0.5) 30%,
+    rgba(138, 0, 255, 0.5) 70%,
+    var(--purple)
+  );
+}
+
+.mv {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-6);
+}
+
+.mv__marker {
+  position: absolute;
+  left: calc(var(--sp-6) * -1);
+  top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+}
+
+.mv__pair {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mv__connector {
+  width: 1px;
+  height: clamp(var(--sp-7), 8vw, 88px);
+  margin-top: var(--sp-3);
+  background: linear-gradient(180deg, rgba(138, 0, 255, 0.5), transparent);
+}
+
+.mv__body {
+  max-width: 46ch;
+}
+
+.mv--right .mv__body {
+  margin-left: auto;
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .mv--right .mv__body {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+.mv__label {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.mv:last-child .mv__label {
+  color: var(--purple-bright);
+}
+
+.mv__text {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-body-1);
+  line-height: var(--lh-body-1);
+  color: var(--text-on-dark-soft);
+}
