@@ -1,0 +1,132 @@
+/* Faixa de pilares: os discos ficam sobre a costura entre o hero (escuro)
+   e a seção de serviços (clara), como no wireframe. */
+.pillars {
+  --pillar-size: clamp(76px, 8vw, 104px);
+  --pillars-pad-top: clamp(40px, 5vw, 60px);
+  --pillars-seam: calc(var(--pillars-pad-top) + var(--pillar-size) / 2);
+
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    var(--black) 0 var(--pillars-seam),
+    var(--white) var(--pillars-seam) 100%
+  );
+}
+
+.pillars__sr-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pillars__list {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--sp-4);
+  padding-top: var(--pillars-pad-top);
+  padding-bottom: clamp(var(--sp-6), 5vw, var(--sp-8));
+}
+
+.pillars__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  text-align: center;
+  min-width: 0;
+}
+
+/* Disco */
+.pillars__disc {
+  display: grid;
+  place-items: center;
+  width: var(--pillar-size);
+  height: var(--pillar-size);
+  border-radius: 50%;
+  border: 1px solid var(--purple-line);
+  background: var(--neutral-950);
+  color: var(--purple-bright);
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    border-color var(--dur-base) ease,
+    background var(--dur-base) ease,
+    color var(--dur-base) ease;
+}
+
+/* Anel externo que respira no hover */
+.pillars__disc::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--pillar-size) + 16px);
+  height: calc(var(--pillar-size) + 16px);
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+  opacity: 0;
+  transform: scale(0.86);
+  transition:
+    opacity var(--dur-base) ease,
+    transform var(--dur-base) var(--ease-spring);
+}
+
+.pillars__item {
+  position: relative;
+}
+
+.pillars__item:hover .pillars__disc {
+  transform: translate3d(0, -6px, 0);
+  border-color: var(--purple);
+  background: var(--purple);
+  color: var(--white);
+}
+
+.pillars__item:hover .pillars__disc::after {
+  opacity: 0.4;
+  transform: scale(1);
+}
+
+.pillars__label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-500);
+  transition: color var(--dur-fast) ease;
+}
+
+.pillars__item:hover .pillars__label {
+  color: var(--neutral-950);
+}
+
+/* Em telas menores a grade quebra em linhas, então a costura deixa de fazer
+   sentido: a faixa inteira volta a ser escura. */
+@media (max-width: 900px) {
+  .pillars {
+    background: var(--black);
+  }
+
+  .pillars__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-5) var(--sp-3);
+    padding-block: clamp(var(--sp-7), 9vw, var(--sp-9));
+  }
+
+  .pillars__label {
+    color: var(--text-on-dark-soft);
+  }
+
+  .pillars__item:hover .pillars__label {
+    color: var(--white);
+  }
+}
+
+@media (max-width: 460px) {
+  .pillars__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

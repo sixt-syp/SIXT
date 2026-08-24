@@ -1,8 +1,10 @@
-import { useState } from 'react'
 import { LuAppWindow, LuArrowUpRight, LuCompass, LuPalette, LuRefreshCw } from 'react-icons/lu'
 import Button from '../../components/Button/Button'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
 import Reveal from '../../components/Reveal'
+import Magnetic from '../../components/Magnetic/Magnetic'
+import ServiceVisual from '../../components/ServiceVisual/ServiceVisual'
+import Pillars from '../Pillars/Pillars'
 import { SERVICES, SERVICES_HEADER } from '../../data/content'
 import './Services.css'
 
@@ -13,9 +15,47 @@ const SERVICE_ICONS = {
   refresh: LuRefreshCw,
 }
 
-export default function Services() {
-  const [openNumber, setOpenNumber] = useState(SERVICES[0].number)
+function ServiceBlock({ service, flipped }) {
+  const Icon = SERVICE_ICONS[service.icon]
 
+  return (
+    <article className={`svc-block ${flipped ? 'svc-block--flipped' : ''}`.trim()}>
+      <Reveal className="svc-block__media" delay={flipped ? 80 : 0}>
+        <ServiceVisual kind={service.visual} />
+        <span className="svc-block__number" aria-hidden="true">
+          {service.number}
+        </span>
+      </Reveal>
+
+      <Reveal className="svc-block__body" delay={flipped ? 0 : 80}>
+        <p className="svc-block__eyebrow">
+          <span className="svc-block__icon" aria-hidden="true">
+            <Icon size={16} strokeWidth={1.75} />
+          </span>
+          {service.tagline}
+        </p>
+
+        <h3 className="svc-block__title">{service.title}</h3>
+        <p className="svc-block__desc">{service.description}</p>
+
+        <ul className="svc-block__items">
+          {service.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+
+        <Magnetic className="svc-block__cta">
+          <Button href={service.cta.href} variant="secondary">
+            {service.cta.label}
+            <LuArrowUpRight size={16} strokeWidth={2} />
+          </Button>
+        </Magnetic>
+      </Reveal>
+    </article>
+  )
+}
+
+export default function Services() {
   return (
     <section
       className="section section--light services"
@@ -23,9 +63,12 @@ export default function Services() {
       data-journey
       aria-labelledby="servicos-title"
     >
-      <div className="container section__inner">
+      <Pillars />
+
+      <div className="container services__inner">
         <SectionHeader
-          label="01 — Serviços"
+          label={SERVICES_HEADER.label}
+          id="servicos-title"
           title={
             <>
               {SERVICES_HEADER.titlePlain}
@@ -36,67 +79,11 @@ export default function Services() {
           split
         />
 
-        <ol className="services__list">
-          {SERVICES.map((service, i) => {
-            const Icon = SERVICE_ICONS[service.icon]
-            const isOpen = openNumber === service.number
-
-            return (
-              <Reveal as="li" key={service.number} delay={i * 60}>
-                <article className={`svc ${isOpen ? 'svc--open' : ''}`}>
-                  <h3 className="svc__heading">
-                    <button
-                      type="button"
-                      className="svc__trigger"
-                      id={`svc-trigger-${service.number}`}
-                      aria-expanded={isOpen}
-                      aria-controls={`svc-panel-${service.number}`}
-                      onClick={() => setOpenNumber(isOpen ? null : service.number)}
-                    >
-                      <span className="svc__number" aria-hidden="true">
-                        {service.number}
-                      </span>
-
-                      <span className="svc__icon" aria-hidden="true">
-                        <Icon size={20} strokeWidth={1.75} />
-                      </span>
-
-                      <span className="svc__titles">
-                        <span className="svc__title">{service.title}</span>
-                        <span className="svc__tagline">{service.tagline}</span>
-                      </span>
-
-                      <span className="svc__plus" aria-hidden="true">
-                        +
-                      </span>
-                    </button>
-                  </h3>
-
-                  <div
-                    className="svc__collapse"
-                    id={`svc-panel-${service.number}`}
-                    role="region"
-                    aria-labelledby={`svc-trigger-${service.number}`}
-                  >
-                    <div className="svc__panel">
-                      <div className="svc__panel-inner">
-                        <p className="svc__desc">{service.description}</p>
-
-                        <ul className="svc__items">
-                          {service.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-
-                        {service.price && <p className="svc__price">{service.price}</p>}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            )
-          })}
-        </ol>
+        <div className="services__blocks">
+          {SERVICES.map((service, i) => (
+            <ServiceBlock key={service.number} service={service} flipped={i % 2 === 1} />
+          ))}
+        </div>
 
         <Reveal className="services__more" delay={120}>
           <p>Seu caso não se encaixa em nada disso?</p>

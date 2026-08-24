@@ -16,6 +16,24 @@
   }
 }
 
+/* Variante centrada — usada na faixa de metodologia */
+.sec-header--centered {
+  justify-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.sec-header--centered .sec-header__title,
+.sec-header--centered .sec-header__desc {
+  max-width: 24ch;
+  margin-inline: auto;
+}
+
+.sec-header--centered .sec-header__desc {
+  max-width: 52ch;
+}
+
 .sec-header__title {
   max-width: 18ch;
 }

@@ -30,7 +30,7 @@
   height: 7px;
   border-radius: 50%;
   background: var(--purple);
-  box-shadow: 0 0 8px rgba(138, 0, 255, 0.7);
+  box-shadow: var(--glow-xs);
 }
 
 .gchart__chip {
@@ -109,7 +109,7 @@
 }
 
 .gchart__dot-point.is-active {
-  filter: drop-shadow(0 0 6px rgba(138, 0, 255, 0.9));
+  filter: drop-shadow(0 0 4px rgba(138, 0, 255, 0.35));
 }
 
 .gchart__baseline {

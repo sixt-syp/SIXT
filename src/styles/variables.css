@@ -78,14 +78,30 @@
   --container-max: 1240px;
   --container-pad: clamp(20px, 5vw, 64px);
 
+  /* Tintas de roxo — usadas como superfície, não como luz */
+  --purple-tint-04: rgba(138, 0, 255, 0.04);
+  --purple-tint-08: rgba(138, 0, 255, 0.08);
+  --purple-tint-14: rgba(138, 0, 255, 0.14);
+  --purple-line: rgba(138, 0, 255, 0.28);
+  --purple-line-strong: rgba(138, 0, 255, 0.45);
+
+  /* Brilho contido — substitui o neon anterior.
+     Escala única para manter o glow consistente em toda a página. */
+  --glow-xs: 0 0 6px rgba(138, 0, 255, 0.18);
+  --glow-sm: 0 0 10px rgba(138, 0, 255, 0.22);
+  --glow-md: 0 6px 20px rgba(138, 0, 255, 0.16);
+  --glow-lift: 0 14px 34px rgba(0, 0, 0, 0.45);
+
   /* Formas & Motion */
   --radius-btn: 12px;
   --radius-card: 18px;
+  --radius-lg: 26px;
 
   --dur-fast: 0.25s;
   --dur-base: 0.45s;
   --dur-slow: 0.8s;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Journey (círculo do scroll) */
   --journey-dot-size: clamp(14px, 1.4vw, 22px);

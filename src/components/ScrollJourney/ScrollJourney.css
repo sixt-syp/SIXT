@@ -3,7 +3,8 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  overflow: visible;
+  /* Trava de segurança: o overlay é decorativo e não pode gerar scroll. */
+  overflow: clip;
 }
 
 .journey__svg {
@@ -16,8 +17,9 @@
 .journey__path {
   fill: none;
   stroke: var(--purple);
-  stroke-width: 1.5;
-  opacity: 0.4;
+  stroke-width: 1.25;
+  /* Fio de fundo: presente, mas sem competir com o conteúdo das seções */
+  opacity: 0.16;
   vector-effect: non-scaling-stroke;
 }
 
@@ -25,7 +27,7 @@
   fill: var(--neutral-500);
   stroke: var(--purple);
   stroke-width: 1;
-  opacity: 0.35;
+  opacity: 0.22;
   transition:
     fill var(--dur-slow) ease,
     opacity var(--dur-slow) ease;
@@ -33,37 +35,46 @@
 
 .journey__marker.is-passed {
   fill: var(--purple);
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
-/* Círculo condutor */
+/* Círculo condutor — apenas posicionamento.
+   A escala fica no núcleo: aplicada aqui, a propriedade `scale` multiplicaria
+   o translate3d escrito pelo JS e o ponto sairia da página, criando rolagem
+   vazia depois do rodapé. */
 .journey__dot {
   position: absolute;
   top: calc(var(--journey-dot-size) / -2);
   left: calc(var(--journey-dot-size) / -2);
   width: var(--journey-dot-size);
   height: var(--journey-dot-size);
+  will-change: transform;
+}
+
+.journey__dot-core {
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: var(--purple);
-  box-shadow: 0 0 14px rgba(138, 0, 255, 0.45);
-  will-change: transform;
+  box-shadow: var(--glow-xs);
   transition:
     scale var(--dur-base) var(--ease-out),
     box-shadow var(--dur-base) ease;
 }
 
-.journey__dot.is-touching {
+.journey__dot.is-touching .journey__dot-core {
   scale: 1.45;
-  box-shadow: 0 0 22px rgba(138, 0, 255, 0.6);
+  box-shadow: var(--glow-sm);
 }
 
-.journey__dot.is-impact {
-  scale: 1.8;
+.journey__dot.is-impact .journey__dot-core {
+  scale: 1.7;
   box-shadow:
-    0 0 26px rgba(138, 0, 255, 0.65),
-    0 0 0 10px rgba(138, 0, 255, 0.12);
+    var(--glow-sm),
+    0 0 0 9px var(--purple-tint-08);
 }
 
-.journey__dot.no-anim {
+.journey__dot.no-anim .journey__dot-core {
   transition: none;
 }

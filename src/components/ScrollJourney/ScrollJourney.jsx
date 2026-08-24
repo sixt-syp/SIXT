@@ -7,7 +7,7 @@ const SNAP_DISTANCE = 0.5
 const VIEWPORT_ANCHOR = 0.62
 const SAMPLE_STEP = 4
 
-const XS_DESKTOP = [10, 86, 13, 85, 15, 83, 50]
+const XS_DESKTOP = [5, 94, 7, 92, 9, 90, 50]
 const XS_MOBILE = [12, 80, 18, 74, 22, 70, 50]
 
 function buildPath(points) {
@@ -252,7 +252,12 @@ export default function ScrollJourney() {
           />
         ))}
       </svg>
-      <div ref={dotRef} className="journey__dot" />
+      {/* O wrapper recebe só a translação (via JS); o núcleo recebe só a escala.
+          Juntos no mesmo elemento, `scale` multiplicaria o translate e jogaria
+          o ponto para fora da página, esticando o scroll do documento. */}
+      <div ref={dotRef} className="journey__dot">
+        <span className="journey__dot-core" />
+      </div>
     </div>
   )
 }
