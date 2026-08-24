@@ -1,0 +1,69 @@
+.journey {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.journey__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.journey__path {
+  fill: none;
+  stroke: var(--purple);
+  stroke-width: 1.5;
+  opacity: 0.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.journey__marker {
+  fill: var(--neutral-500);
+  stroke: var(--purple);
+  stroke-width: 1;
+  opacity: 0.35;
+  transition:
+    fill var(--dur-slow) ease,
+    opacity var(--dur-slow) ease;
+}
+
+.journey__marker.is-passed {
+  fill: var(--purple);
+  opacity: 0.9;
+}
+
+/* Círculo condutor */
+.journey__dot {
+  position: absolute;
+  top: calc(var(--journey-dot-size) / -2);
+  left: calc(var(--journey-dot-size) / -2);
+  width: var(--journey-dot-size);
+  height: var(--journey-dot-size);
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 14px rgba(138, 0, 255, 0.45);
+  will-change: transform;
+  transition:
+    scale var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) ease;
+}
+
+.journey__dot.is-touching {
+  scale: 1.45;
+  box-shadow: 0 0 22px rgba(138, 0, 255, 0.6);
+}
+
+.journey__dot.is-impact {
+  scale: 1.8;
+  box-shadow:
+    0 0 26px rgba(138, 0, 255, 0.65),
+    0 0 0 10px rgba(138, 0, 255, 0.12);
+}
+
+.journey__dot.no-anim {
+  transition: none;
+}

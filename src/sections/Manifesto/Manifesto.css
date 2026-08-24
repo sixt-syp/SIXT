@@ -1,0 +1,81 @@
+.manifesto {
+  overflow: hidden;
+}
+
+.manifesto__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: clamp(1.9rem, 1.2rem + 4.5vw, 4.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.manifesto__line {
+  display: block;
+}
+
+.manifesto__line em {
+  font-style: normal;
+  color: var(--purple);
+}
+
+@media (min-width: 900px) {
+  .manifesto__line--indent {
+    margin-left: clamp(var(--sp-7), 12vw, 180px);
+  }
+}
+
+.manifesto__body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-5);
+  max-width: 62ch;
+  margin-top: var(--sp-8);
+}
+
+.manifesto__body .node {
+  margin-top: 6px;
+}
+
+.manifesto__body p {
+  font-size: var(--fs-body-1);
+  line-height: var(--lh-body-1);
+  color: var(--text-soft);
+}
+
+/* Princípios */
+.manifesto__principles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  margin-top: clamp(var(--sp-8), 9vw, 96px);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border-light);
+}
+
+.manifesto__principle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 600;
+  letter-spacing: var(--ls-heading);
+  text-transform: uppercase;
+  transition: color var(--dur-fast) ease;
+}
+
+.manifesto__principle:hover {
+  color: var(--purple);
+}
+
+.manifesto__principle i {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--purple);
+}

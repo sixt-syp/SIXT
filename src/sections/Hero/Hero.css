@@ -1,0 +1,187 @@
+.hero {
+  overflow: hidden;
+}
+
+/* Textura de pontos — profundidade sutil */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1.4px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 36%, #000 25%, transparent 74%);
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 36%, #000 25%, transparent 74%);
+  pointer-events: none;
+}
+
+/* Brilho roxo discreto atrás da composição */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(920px, 94vw);
+  height: 540px;
+  background: radial-gradient(closest-side, rgba(138, 0, 255, 0.15), transparent 72%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--sp-7), 6vw, 64px);
+  padding-top: 140px;
+  padding-bottom: 110px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
+   Conteúdo centralizado
+   --------------------------------------------------------- */
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.hero__title {
+  margin-top: var(--sp-5);
+  max-width: 18ch;
+  font-size: clamp(1.9rem, 1.3rem + 3vw, 3.55rem); /* menor e mais refinado */
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+}
+
+.hero__title-line {
+  display: block;
+}
+
+/* Palavra-chave com gradiente da própria marca */
+.hero__title em {
+  font-style: normal;
+  background: linear-gradient(94deg, var(--purple-bright) 8%, var(--purple) 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Divisor — sistema de nodes */
+.hero__divider {
+  margin-top: var(--sp-5);
+  opacity: 0.75;
+}
+
+.hero__divider .dotline {
+  min-width: 130px;
+}
+
+.hero__desc {
+  margin-top: var(--sp-4);
+  max-width: 52ch;
+  font-size: 0.9375rem;
+  line-height: var(--lh-body-1);
+  color: var(--text-on-dark-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+/* ---------------------------------------------------------
+   Gráfico abaixo da escrita
+   --------------------------------------------------------- */
+
+.hero__side {
+  width: 100%;
+  max-width: 700px;
+}
+
+.hero__side .gchart {
+  box-shadow:
+    0 30px 90px rgba(138, 0, 255, 0.14),
+    0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Indicador de scroll */
+.hero__scroll-hint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: var(--sp-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--neutral-500);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   Responsivo
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .hero__inner {
+    min-height: auto;
+    padding-top: 130px;
+    padding-bottom: 96px;
+    gap: var(--sp-7);
+  }
+
+  .hero::after {
+    height: 420px;
+    top: -6%;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero__inner {
+    padding-top: 120px;
+    padding-bottom: 88px;
+  }
+
+  .hero__desc {
+    max-width: 100%;
+    font-size: 0.875rem;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .hero__divider .dotline {
+    min-width: 96px;
+  }
+
+  .hero__scroll-hint {
+    letter-spacing: 0.22em;
+  }
+
+  .hero__scroll-hint .dotline {
+    min-width: 44px;
+  }
+
+  .gchart__bar {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero__actions {
+    width: 100%;
+  }
+}
