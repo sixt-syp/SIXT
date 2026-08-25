@@ -91,7 +91,7 @@
 
 .pillars__label {
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: var(--fs-caption);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -125,7 +125,7 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   .pillars__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

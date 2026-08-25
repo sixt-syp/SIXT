@@ -97,7 +97,7 @@ h4 {
 }
 
 section[id] {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 110px;
 }
 
 .section--dark {
@@ -137,7 +137,7 @@ section[id] {
   align-items: center;
   gap: 12px;
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: var(--fs-caption);
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -165,12 +165,12 @@ section[id] {
   position: fixed;
   top: -100%;
   left: 16px;
-  z-index: 3000;
+  z-index: var(--z-skip);
   padding: 12px 20px;
   background: var(--purple);
   color: var(--white);
   border-radius: 0 0 12px 12px;
-  font-size: 0.8125rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   transition: top 0.2s ease;
 }

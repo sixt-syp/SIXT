@@ -74,5 +74,5 @@
   flex: 1;
   height: 1.5px;
   min-width: 48px;
-  background: linear-gradient(90deg, var(--purple) 0%, rgba(138, 0, 255, 0.35) 100%);
+  background: linear-gradient(90deg, var(--purple) 0%, var(--purple-line) 100%);
 }

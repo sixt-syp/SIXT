@@ -19,7 +19,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.625rem;
+  font-size: var(--fs-overline);
   font-weight: 700;
   letter-spacing: 0.22em;
   color: var(--neutral-300);
@@ -35,12 +35,12 @@
 
 .gchart__chip {
   font-family: var(--font-heading);
-  font-size: 0.5625rem;
+  font-size: var(--fs-overline);
   font-weight: 700;
   letter-spacing: 0.18em;
   color: var(--purple-soft);
-  border: 1px solid rgba(138, 0, 255, 0.45);
-  border-radius: 50px;
+  border: 1px solid var(--purple-line-strong);
+  border-radius: var(--radius-btn);
   padding: 5px 12px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .gchart__scan {
-  stroke: rgba(138, 0, 255, 0.35);
+  stroke: var(--purple-line);
   stroke-width: 1;
   stroke-dasharray: 2 5;
   pointer-events: none;
@@ -109,7 +109,7 @@
 }
 
 .gchart__dot-point.is-active {
-  filter: drop-shadow(0 0 4px rgba(138, 0, 255, 0.35));
+  filter: drop-shadow(0 0 4px var(--purple-line));
 }
 
 .gchart__baseline {
@@ -117,7 +117,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.28em;
-  fill: var(--neutral-500);
+  fill: var(--text-on-dark-faint);
 }
 
 /* Tooltip */
@@ -134,7 +134,7 @@
 }
 
 .gchart__tooltip rect {
-  fill: #000000;
+  fill: var(--black);
   stroke: var(--purple);
   stroke-width: 1;
 }
@@ -145,6 +145,13 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   fill: var(--purple-soft);
+}
+
+@media (max-width: 480px) {
+  /* No celular o texto do eixo renderiza ~5px: vira ruído */
+  .gchart__baseline {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
