@@ -42,11 +42,15 @@
   min-width: 0;
 }
 
-/* Disco numerado */
+/* Disco numerado — o padding inferior reserva a faixa do nó,
+   mantendo número e ícone bem separados em qualquer tamanho */
 .mv__disc {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 22%;
   width: var(--mv-disc);
   height: var(--mv-disc);
   border-radius: 50%;
@@ -74,7 +78,7 @@
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--neutral-500);
+  color: var(--text-on-dark-faint);
   transition: color var(--dur-base) ease;
 }
 
@@ -82,10 +86,10 @@
   color: var(--white);
 }
 
-/* Nó do sistema visual, abaixo do número */
+/* Nó do sistema visual, na faixa reservada abaixo do número */
 .mv__node {
   position: absolute;
-  bottom: 14px;
+  bottom: 8%;
   display: inline-flex;
   opacity: 0.35;
   transition: opacity var(--dur-base) ease;

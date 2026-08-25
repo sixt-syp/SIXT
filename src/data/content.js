@@ -8,6 +8,7 @@ import alissonImg from '../assets/team/alisson.jpg'
 export const TAGLINE = 'Entender antes de criar.'
 
 export const NAV_LINKS = [
+  { label: 'Início', href: '#inicio' },
   { label: 'Sobre', href: '#sobre' },
   { label: 'Serviços', href: '#servicos' },
   { label: 'Método', href: '#movimento' },
@@ -17,8 +18,8 @@ export const NAV_LINKS = [
 
 export const HERO = {
   eyebrow: 'Estúdio de tecnologia e design',
-  titleLine1: 'CRIAR A COISA CERTA',
-  titleLine2Plain: 'É O QUE IMPORTA PRA GENTE.',
+  titleLine1: 'SOMOS 6.',
+  titleLine2Plain: 'CRIANDO A SOLUÇÃO CERTA PARA VOCÊ.',
   description:
     'A SIXT transforma necessidades de negócio em soluções digitais. Antes de criar, a gente entende o problema, encontra o que realmente importa e constrói a solução certa.',
   ctaPrimary: { label: 'Vamos conversar', href: '#contato' },
@@ -114,7 +115,7 @@ export const MOVEMENT_HEADER = {
   titlePlain: 'O problema vem ',
   titleAccent: 'antes da solução.',
   description:
-    'Cinco etapas que evitam a solução errada — do primeiro contato à evolução contínua.',
+    'Cinco etapas que evitam a solução errada',
   cta: { label: 'Começar pelo diagnóstico', href: '#contato' },
 }
 
@@ -162,7 +163,23 @@ export const MANIFESTO = {
   line2Plain: 'PRIMEIRO A GENTE ENTENDE.',
   line2Accent: 'DEPOIS A GENTE CRIA.',
   body: 'A SIXT acredita que criar por criar não resolve nada. Antes de um site, existe um negócio. Antes de uma identidade, existe uma história. Antes de uma ferramenta, existe um problema. Por isso, a gente começa entendendo e usa estratégia, design e tecnologia para transformar isso em algo concreto.',
-  principles: ['Entender', 'Criar', 'Evoluir'],
+  principles: [
+    {
+      id: 'entender',
+      label: 'Entender',
+      text: 'Ouvir antes de propor: negócio, público e o problema real por trás do pedido.',
+    },
+    {
+      id: 'criar',
+      label: 'Criar',
+      text: 'Estratégia, design e tecnologia com escopo claro e intenção em cada decisão.',
+    },
+    {
+      id: 'evoluir',
+      label: 'Evoluir',
+      text: 'Medir, ajustar e melhorar depois da entrega. Projeto entregue é relação começada.',
+    },
+  ],
 }
 
 export const TEAM_HEADER = {
@@ -237,13 +254,8 @@ export const CONTACT = {
   titlePlain: 'VAMOS ',
   titleAccent: 'CONVERSAR.',
   description:
-    'Conte como o seu negócio funciona hoje. A gente ajuda a descobrir o que realmente precisa ser resolvido — e a melhor forma de resolver.',
+    'Conte como o seu negócio funciona hoje. A gente ajuda a descobrir o que realmente precisa ser resolvido e a melhor forma de resolver.',
   cta: 'Começar meu projeto',
-  bullets: [
-    'Diagnóstico antes de qualquer proposta',
-    'Escopo, prazo e valor definidos por escrito',
-    'Acompanhamento depois da entrega',
-  ],
 }
 
 export const FOOTER = {

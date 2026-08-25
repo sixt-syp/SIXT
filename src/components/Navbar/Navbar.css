@@ -1,23 +1,45 @@
+/* Navbar flutuante — destacada do topo, em pílula arredondada.
+   O respiro lateral fica aqui para não brigar com o
+   margin-inline: auto do .container na centralização. */
 .nav {
   position: fixed;
   inset-inline: 0;
-  top: 0;
-  z-index: 1000;
-  transition: background var(--dur-base) ease, border-color var(--dur-base) ease;
-  border-bottom: 1px solid transparent;
-}
-
-.nav--scrolled {
-  background: rgba(5, 5, 7, 0.97);
-  border-bottom-color: var(--neutral-800);
+  top: clamp(12px, 2vw, 20px);
+  z-index: var(--z-nav);
+  padding-inline: clamp(12px, 2vw, 24px);
 }
 
 .nav__bar {
-  height: 80px;
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--sp-5);
+  padding-inline: clamp(16px, 2.4vw, 28px);
+  background: rgba(5, 5, 7, 0.72);
+  border: 1px solid var(--neutral-800);
+  border-radius: 999px;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  transition:
+    background var(--dur-base) ease,
+    box-shadow var(--dur-base) ease,
+    border-color var(--dur-base) ease;
+}
+
+.nav--scrolled .nav__bar {
+  background: rgba(5, 5, 7, 0.92);
+  border-color: var(--neutral-700);
+  box-shadow: var(--glow-lift);
+}
+
+/* Menu aberto: a pílula some e sobra só logo + close sobre o overlay */
+.nav--open .nav__bar {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Logo */
@@ -46,7 +68,7 @@
 
 .nav__link {
   position: relative;
-  font-size: 0.8125rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -98,15 +120,46 @@
 
 .nav__toggle {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--white);
-  border-radius: 10px;
 }
 
-/* Menu mobile — fora do fluxo para nunca alterar a altura da navbar */
+/* Hambúrguer que morfa em X — só transform, 60fps */
+.nav__burger {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 16px;
+}
+
+.nav__burger-line {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.nav__burger-line:first-child {
+  transform: translateY(-5px);
+}
+
+.nav__burger-line:last-child {
+  transform: translateY(5px);
+}
+
+.nav__toggle[aria-expanded='true'] .nav__burger-line:first-child {
+  transform: rotate(45deg);
+}
+
+.nav__toggle[aria-expanded='true'] .nav__burger-line:last-child {
+  transform: rotate(-45deg);
+}
+
+/* Menu mobile — fora do fluxo para nunca alterar a altura da navbar.
+   Fundo preto liso; o padding alinha os links com o logo da pílula.
+   Entra deslizando de cima junto com o fade. */
 .nav__menu {
   position: absolute;
   top: 100%;
@@ -115,53 +168,75 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--sp-7);
-  padding: var(--sp-6) var(--container-pad) var(--sp-8);
-  min-height: calc(100dvh - 80px);
-  background:
-    radial-gradient(60% 40% at 85% 10%, rgba(138, 0, 255, 0.14), transparent 70%),
-    var(--black);
+  gap: var(--sp-6);
+  padding:
+    var(--sp-5)
+    calc(clamp(12px, 2vw, 24px) + clamp(16px, 2.4vw, 28px))
+    var(--sp-7);
+  min-height: calc(100dvh - 92px);
+  background: var(--black);
   opacity: 0;
+  transform: translate3d(0, -16px, 0);
   visibility: hidden;
-  transition: opacity var(--dur-base) ease, visibility 0s linear 0.45s;
+  overflow-y: auto;
+  transition:
+    opacity var(--dur-base) ease,
+    transform var(--dur-base) var(--ease-out),
+    visibility 0s linear 0.45s;
 }
 
 .nav__menu.is-open {
   opacity: 1;
+  transform: translate3d(0, 0, 0);
   visibility: visible;
-  transition-delay: 0s, 0s;
+  transition-delay: 0s, 0s, 0s;
 }
 
 .nav__menu-links {
   display: flex;
   flex-direction: column;
-  margin-top: var(--sp-6);
+  margin-top: var(--sp-4);
 }
 
+/* Links entram em cascata na abertura e saem juntos no fechamento */
 .nav__menu-link {
   display: flex;
   align-items: center;
   gap: var(--sp-4);
-  padding-block: var(--sp-3);
+  padding-block: var(--sp-2);
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
   font-weight: 600;
   letter-spacing: var(--ls-heading);
   color: var(--white);
   opacity: 0;
   transform: translate3d(0, 18px, 0);
+  transition:
+    opacity var(--dur-fast) ease,
+    transform var(--dur-base) var(--ease-out);
 }
 
 .nav__menu.is-open .nav__menu-link {
-  animation: menu-in var(--dur-slow) var(--ease-out) forwards;
-  animation-delay: calc(var(--i) * 70ms + 120ms);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: calc(var(--i) * 60ms + 120ms);
 }
 
-@keyframes menu-in {
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+.nav__menu > .btn {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity var(--dur-fast) ease,
+    transform var(--dur-base) var(--ease-out),
+    background var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+}
+
+.nav__menu.is-open > .btn {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: calc(var(--i, 6) * 60ms + 120ms);
 }
 
 @media (min-width: 900px) {
@@ -177,6 +252,10 @@
   .nav__menu {
     display: none;
   }
+
+  .nav__bar {
+    min-height: 72px;
+  }
 }
 
 @media (min-width: 900px) and (max-width: 1140px) {
@@ -186,5 +265,18 @@
 
   .nav__bar {
     gap: var(--sp-4);
+  }
+}
+
+/* Telas pequenas: pílula mais compacta */
+@media (max-width: 480px) {
+  .nav__bar {
+    min-height: 56px;
+    padding-inline: 16px;
+    padding-block: 10px;
+  }
+
+  .nav__logo-img {
+    height: 28px;
   }
 }

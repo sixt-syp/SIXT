@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { LuMenu, LuX } from 'react-icons/lu'
 import Button from '../Button/Button'
 import { NAV_LINKS } from '../../data/content'
 import Node from '../Node/Node'
@@ -59,7 +58,7 @@ export default function Navbar() {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+    <header className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}>
       <div className="nav__bar container">
         <a href="#inicio" className="nav__logo" onClick={closeMenu} aria-label="SIXT — voltar ao início">
           <img src={logoSvg} alt="SIXT" className="nav__logo-img" width="46" height="36" />
@@ -82,17 +81,21 @@ export default function Navbar() {
             Vamos conversar
           </Button>
 
-          <button
+          <Button
             ref={menuButtonRef}
-            type="button"
+            variant="icon"
+            size="md"
             className="nav__toggle"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Fechar menu' : 'Abrir menu'}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <LuX size={26} /> : <LuMenu size={26} />}
-          </button>
+            <span className="nav__burger" aria-hidden="true">
+              <span className="nav__burger-line" />
+              <span className="nav__burger-line" />
+            </span>
+          </Button>
         </div>
       </div>
 
@@ -120,8 +123,13 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Button href="#contato" onClick={closeMenu} tabIndex={open ? 0 : -1}>
-          [ Vamos conversar ]
+        <Button
+          href="#contato"
+          onClick={closeMenu}
+          tabIndex={open ? 0 : -1}
+          style={{ '--i': NAV_LINKS.length }}
+        >
+          Vamos conversar
         </Button>
       </div>
     </header>
