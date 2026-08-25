@@ -1,4 +1,4 @@
-import { LuArrowUpRight, LuCheck } from 'react-icons/lu'
+import { LuArrowUpRight } from 'react-icons/lu'
 import Button from '../../components/Button/Button'
 import ExternalLink from '../../components/ExternalLink'
 import Reveal from '../../components/Reveal'
@@ -7,24 +7,6 @@ import Node from '../../components/Node/Node'
 import { SOCIALS, CONTACT, TAGLINE } from '../../data/content'
 import './Contact.css'
 
-function ContactVisual() {
-  return (
-    <div className="contact__visual" aria-hidden="true">
-      <span className="contact__orbit contact__orbit--lg" />
-      <span className="contact__orbit contact__orbit--md" />
-      <span className="contact__orbit contact__orbit--sm" />
-
-      <span className="contact__sat contact__sat--a">
-        <Node variant="dot" size={9} />
-      </span>
-      <span className="contact__sat contact__sat--b">
-        <Node variant="dot" size={7} />
-      </span>
-
-      <p className="contact__visual-text">{TAGLINE}</p>
-    </div>
-  )
-}
 
 export default function Contact() {
   return (
@@ -35,9 +17,6 @@ export default function Contact() {
       aria-labelledby="contato-title"
     >
       <div className="container section__inner contact__inner">
-        <Reveal className="contact__media">
-          <ContactVisual />
-        </Reveal>
 
         <div className="contact__body">
           <Reveal as="p" className="section-label">
@@ -53,16 +32,7 @@ export default function Contact() {
             {CONTACT.description}
           </Reveal>
 
-          <Reveal as="ul" className="contact__bullets" delay={200}>
-            {CONTACT.bullets.map((bullet) => (
-              <li key={bullet}>
-                <LuCheck size={15} strokeWidth={2.5} aria-hidden="true" />
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </Reveal>
-
-          <Reveal className="contact__actions" delay={260}>
+          <Reveal className="contact__actions" delay={200}>
             <Magnetic>
               <Button href="mailto:codesixtech@gmail.com" size="lg">
                 {CONTACT.cta}
