@@ -50,38 +50,77 @@
   color: var(--text-soft);
 }
 
-/* Princípios */
+/* Princípios — grade de cards */
 .manifesto__principles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3) var(--sp-6);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-4);
   margin-top: clamp(var(--sp-8), 9vw, 96px);
-  padding-top: var(--sp-5);
-  border-top: 1px solid var(--border-light);
 }
 
 .manifesto__principle {
-  display: inline-flex;
-  align-items: baseline;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   gap: var(--sp-2);
-  font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
-  font-weight: 600;
-  letter-spacing: var(--ls-heading);
-  text-transform: uppercase;
-  transition: color var(--dur-fast) ease;
+  padding: var(--sp-5);
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) ease,
+    box-shadow var(--dur-base) ease;
+}
+
+/* Traço roxo que corre no topo do card ao passar o mouse */
+.manifesto__principle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
 }
 
 .manifesto__principle:hover {
-  color: var(--purple);
+  transform: translate3d(0, -4px, 0);
+  border-color: var(--purple-line-strong);
+  box-shadow: var(--glow-md);
+}
+
+.manifesto__principle:hover::before {
+  transform: scaleX(1);
 }
 
 .manifesto__principle i {
   font-style: normal;
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: var(--fs-caption);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--purple);
+}
+
+.manifesto__principle h3 {
+  font-size: var(--fs-h4);
+  text-transform: uppercase;
+}
+
+.manifesto__principle p {
+  font-size: var(--fs-body-3);
+  line-height: var(--lh-body-2);
+  color: var(--text-on-light-soft);
+}
+
+@media (max-width: 900px) {
+  .manifesto__principles {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
 }

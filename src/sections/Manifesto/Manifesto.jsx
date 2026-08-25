@@ -33,14 +33,15 @@ export default function Manifesto() {
           <p>{MANIFESTO.body}</p>
         </Reveal>
 
-        <Reveal className="manifesto__principles" delay={360} aria-label="Princípios da SIXT">
-          {MANIFESTO.principles.map((word, i) => (
-            <span key={word} className="manifesto__principle">
+        <ul className="manifesto__principles" aria-label="Princípios da SIXT">
+          {MANIFESTO.principles.map((principle, i) => (
+            <Reveal as="li" key={principle.id} className="manifesto__principle" delay={360 + i * 90}>
               <i aria-hidden="true">0{i + 1}</i>
-              {word}
-            </span>
+              <h3>{principle.label}</h3>
+              <p>{principle.text}</p>
+            </Reveal>
           ))}
-        </Reveal>
+        </ul>
       </div>
 
       <Marquee items={MARQUEE_ITEMS} className="manifesto__marquee" speed={30} />
