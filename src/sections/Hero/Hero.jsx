@@ -12,10 +12,6 @@ export default function Hero() {
     <section className="section section--dark hero" id="inicio" data-journey>
       <div className="hero__inner container section__inner">
         <div className="hero__content">
-          <Reveal className="hero__eyebrow">
-            <Node variant="dot" size={7} />
-            <span>{HERO.eyebrow}</span>
-          </Reveal>
 
           <Reveal as="h1" className="hero__title" delay={80}>
             <span className="hero__title-line">{HERO.titleLine1}</span>
@@ -38,15 +34,6 @@ export default function Hero() {
             <Button href={HERO.ctaSecondary.href} variant="secondary">
               {HERO.ctaSecondary.label}
             </Button>
-          </Reveal>
-
-          <Reveal as="dl" className="hero__stats" delay={340}>
-            {HERO.stats.map((stat) => (
-              <div key={stat.label} className="hero__stat">
-                <dt className="hero__stat-value">{stat.value}</dt>
-                <dd className="hero__stat-label">{stat.label}</dd>
-              </div>
-            ))}
           </Reveal>
         </div>
 
