@@ -70,7 +70,7 @@ export default function Footer() {
           </a>
 
           <Magnetic>
-            <Button href="mailto:codesixtech@gmail.com">
+            <Button href="mailto:codesixtech@gmail.com" variant="glass">
               Começar meu projeto
               <LuArrowUpRight size={16} strokeWidth={2} />
             </Button>
@@ -78,6 +78,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__legal">
+          <Node variant="dot" size={7} className="footer__legal-dot" />
           <span>© {year} SIX Technology</span>
           <span className="footer__legal-signature">{FOOTER.signature}</span>
         </div>

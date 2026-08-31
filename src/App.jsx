@@ -1,14 +1,24 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import ScrollJourney from './components/ScrollJourney/ScrollJourney'
 import { ScrollTrigger } from './lib/gsap'
 import Hero from './sections/Hero/Hero'
 import Services from './sections/Services/Services'
-import Movement from './sections/Movement/Movement'
-import Manifesto from './sections/Manifesto/Manifesto'
-import Team from './sections/Team/Team'
-import Contact from './sections/Contact/Contact'
+
+const Movement = lazy(() => import('./sections/Movement/Movement'))
+const Manifesto = lazy(() => import('./sections/Manifesto/Manifesto'))
+const Team = lazy(() => import('./sections/Team/Team'))
+const Contact = lazy(() => import('./sections/Contact/Contact'))
+
+function SectionFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      style={{ minHeight: '60vh', width: '100%' }}
+    />
+  )
+}
 
 export default function App() {
   useEffect(() => {
@@ -56,10 +66,12 @@ export default function App() {
       <main id="conteudo" className="page">
         <Hero />
         <Services />
-        <Movement />
-        <Manifesto />
-        <Team />
-        <Contact />
+        <Suspense fallback={<SectionFallback />}>
+          <Movement />
+          <Manifesto />
+          <Team />
+          <Contact />
+        </Suspense>
 
         <ScrollJourney />
       </main>

@@ -172,6 +172,7 @@
 }
 
 .footer__legal {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -183,6 +184,14 @@
   color: var(--text-on-dark-faint);
   font-size: var(--fs-caption);
   letter-spacing: 0.04em;
+}
+
+.footer__legal-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  flex-shrink: 0;
+  transform: translateY(-50%);
 }
 
 .footer__legal-signature {

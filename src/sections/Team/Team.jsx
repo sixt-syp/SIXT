@@ -130,7 +130,7 @@ export default function Team() {
                 swiper.params.pagination.el = dotsRef.current
               }}
               breakpoints={{
-                0: { slidesPerView: 1.06, spaceBetween: 16 },
+                0: { slidesPerView: 1.15, spaceBetween: 16 },
                 560: { slidesPerView: 2, spaceBetween: 24 },
               }}
             >
@@ -177,7 +177,7 @@ export default function Team() {
 
         <Reveal className="team__cta" delay={140}>
           <Magnetic>
-            <Button href={TEAM_HEADER.cta.href}>
+            <Button href={TEAM_HEADER.cta.href} variant="glass">
               {TEAM_HEADER.cta.label}
               <LuArrowUpRight size={16} strokeWidth={2} />
             </Button>

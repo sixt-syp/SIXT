@@ -73,6 +73,31 @@ h4 {
   color: var(--white);
 }
 
+/* Scrollbar lateral — tom roxo */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple) var(--neutral-900);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--purple), var(--purple-dark));
+  border-radius: 999px;
+  border: 2px solid var(--neutral-900);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--purple-bright), var(--purple));
+}
+
 :focus-visible {
   outline: 2px solid var(--purple-bright);
   outline-offset: 3px;

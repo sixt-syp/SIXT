@@ -26,12 +26,12 @@ export default function Hero() {
 
           <Reveal className="hero__actions" delay={260}>
             <Magnetic>
-              <Button href={HERO.ctaPrimary.href}>
+              <Button href={HERO.ctaPrimary.href} variant="glass">
                 {HERO.ctaPrimary.label}
                 <LuArrowUpRight size={16} strokeWidth={2} />
               </Button>
             </Magnetic>
-            <Button href={HERO.ctaSecondary.href} variant="secondary">
+            <Button href={HERO.ctaSecondary.href} variant="ghost">
               {HERO.ctaSecondary.label}
             </Button>
           </Reveal>

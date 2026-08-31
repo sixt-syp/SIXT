@@ -124,6 +124,148 @@
   color: var(--purple-soft);
 }
 
+/* Glass — CTA premium com vidro, shimmer e seta animada */
+.btn--glass {
+  position: relative;
+  background: rgba(138, 0, 255, 0.1);
+  border: 1px solid rgba(138, 0, 255, 0.25);
+  color: var(--white);
+  overflow: hidden;
+  /* Respiro à direita para a seta absoluta não encostar no texto */
+  padding-right: 58px;
+}
+
+/* Seta posicionada à direita para o texto ficar centrado */
+.btn--glass svg {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.btn--glass:hover svg {
+  transform: translate(4px, -50%);
+}
+
+.btn--glass:active svg {
+  transform: translate(0, -50%);
+}
+
+.btn--glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(138, 0, 255, 0.4) 50%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn--glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 70%
+  );
+  transition: left 0.6s var(--ease-out);
+  pointer-events: none;
+}
+
+.btn--glass:hover {
+  background: rgba(138, 0, 255, 0.16);
+  border-color: rgba(138, 0, 255, 0.45);
+  box-shadow:
+    0 0 20px rgba(138, 0, 255, 0.2),
+    0 0 40px rgba(138, 0, 255, 0.08);
+}
+
+.btn--glass:hover::before {
+  opacity: 1;
+}
+
+.btn--glass:hover::after {
+  left: 110%;
+}
+
+.btn--glass:active {
+  background: rgba(138, 0, 255, 0.22);
+  box-shadow: 0 0 12px rgba(138, 0, 255, 0.15);
+}
+
+/* Glass em fundo claro — texto roxo para leitura, mantém o brilho */
+.section--light .btn--glass {
+  color: var(--purple-dark);
+  background: rgba(138, 0, 255, 0.06);
+}
+
+.section--light .btn--glass:hover {
+  color: var(--purple);
+  background: rgba(138, 0, 255, 0.12);
+  box-shadow:
+    0 0 18px rgba(138, 0, 255, 0.14),
+    0 12px 30px rgba(138, 0, 255, 0.08);
+}
+
+.section--light .btn--glass:active {
+  color: var(--purple-dark);
+  background: rgba(138, 0, 255, 0.16);
+}
+
+/* Ghost — outline glass, par do btn--glass (usa em pares primário/secundário) */
+.btn--ghost {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text-on-dark-soft);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.section--light .btn--ghost {
+  border-color: rgba(0, 0, 0, 0.14);
+  color: var(--text-on-light-soft);
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--purple-line-strong);
+  color: var(--white);
+  box-shadow: var(--glow-sm);
+}
+
+.section--light .btn--ghost:hover {
+  color: var(--purple);
+}
+
+.btn--ghost:active {
+  transform: translate3d(0, 0, 0);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.section--light .btn--ghost:active {
+  background: var(--purple-tint-08);
+}
+
 /* Estados compartilhados */
 .btn:focus-visible {
   outline: 2px solid var(--purple-bright);

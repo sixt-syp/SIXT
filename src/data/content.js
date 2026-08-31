@@ -1,9 +1,9 @@
-import pedroImg from '../assets/team/pedro.jpg'
-import gabrielImg from '../assets/team/gabriel.jpg'
-import sarahImg from '../assets/team/sarah.jpg'
-import jardelImg from '../assets/team/jardel.jpg'
-import amandaImg from '../assets/team/amanda.jpg'
-import alissonImg from '../assets/team/alisson.jpg'
+import pedroImg from '../assets/team/pedro.webp'
+import gabrielImg from '../assets/team/gabriel.webp'
+import sarahImg from '../assets/team/sarah.webp'
+import jardelImg from '../assets/team/jardel.webp'
+import amandaImg from '../assets/team/amanda.webp'
+import alissonImg from '../assets/team/alisson.webp'
 
 export const TAGLINE = 'Entender antes de criar.'
 

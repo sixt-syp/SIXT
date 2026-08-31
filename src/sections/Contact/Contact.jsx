@@ -34,7 +34,7 @@ export default function Contact() {
 
           <Reveal className="contact__actions" delay={200}>
             <Magnetic>
-              <Button href="mailto:codesixtech@gmail.com" size="lg">
+              <Button href="mailto:codesixtech@gmail.com" size="lg" variant="glass">
                 {CONTACT.cta}
                 <LuArrowUpRight size={18} strokeWidth={2} />
               </Button>

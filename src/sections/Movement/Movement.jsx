@@ -121,7 +121,7 @@ export default function Movement() {
 
         <Reveal className="movement__cta" delay={160}>
           <Magnetic>
-            <Button href={MOVEMENT_HEADER.cta.href}>
+            <Button href={MOVEMENT_HEADER.cta.href} variant="glass">
               {MOVEMENT_HEADER.cta.label}
               <LuArrowUpRight size={16} strokeWidth={2} />
             </Button>

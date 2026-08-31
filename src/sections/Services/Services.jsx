@@ -45,7 +45,7 @@ function ServiceBlock({ service, flipped }) {
         </ul>
 
         <Magnetic className="svc-block__cta">
-          <Button href={service.cta.href} variant="secondary">
+          <Button href={service.cta.href} variant="ghost">
             {service.cta.label}
             <LuArrowUpRight size={16} strokeWidth={2} />
           </Button>
@@ -87,7 +87,7 @@ export default function Services() {
 
         <Reveal className="services__more" delay={120}>
           <p>Seu caso não se encaixa em nada disso?</p>
-          <Button href="#contato" variant="secondary">
+          <Button href="#contato" variant="ghost">
             Quero entender
             <LuArrowUpRight size={16} strokeWidth={2} />
           </Button>

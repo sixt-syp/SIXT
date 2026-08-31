@@ -70,7 +70,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center;
   filter: grayscale(0.4) contrast(1.02);
   transition:
     filter var(--dur-slow) ease,
@@ -206,13 +206,43 @@
     width: 100%;
   }
 
+  /* Card mais compacto no mobile: foto quadrada 1:1 (evita zoom e
+     mantém consistência com as fontes normalizadas) + info reduzida. */
+  .member__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .member__info {
+    padding: var(--sp-3) var(--sp-4) var(--sp-2);
+  }
+
+  .member__bio {
+    font-size: var(--fs-body-3);
+    line-height: var(--lh-body-2);
+    margin-top: var(--sp-2);
+  }
+
+  .member__links {
+    padding: 0 var(--sp-4) var(--sp-4);
+    gap: var(--sp-2);
+  }
+
+  .member__links a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .member__name {
+    font-size: var(--fs-body-2);
+  }
+
   /* Controles sob o carrossel, na linguagem dos botões-ícone */
   .team__controls {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--sp-5);
-    margin-top: var(--sp-5);
+    margin-top: var(--sp-4);
   }
 
   .team__nav::after {

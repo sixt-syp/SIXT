@@ -82,6 +82,22 @@
   margin-top: var(--sp-6);
 }
 
+/* Botões da hero — largura natural no desktop */
+.hero__actions .btn {
+  min-height: 56px;
+  padding-inline: 34px;
+  font-size: var(--fs-small);
+}
+
+/* Primário (glass) ganha respiro para a seta absoluta. */
+.hero__actions .btn--glass svg {
+  right: 26px;
+}
+
+.hero__actions .btn--glass {
+  padding-right: 56px;
+}
+
 /* Faixa de números — o bloco segmentado do wireframe */
 .hero__stats {
   display: flex;
@@ -220,6 +236,12 @@
 
   .hero__actions .btn {
     flex: 1 1 auto;
+    min-height: 54px;
+    padding-inline: 28px;
+  }
+
+  .hero__actions .btn--glass {
+    padding-right: 52px;
   }
 
   .hero__stat {
@@ -241,8 +263,20 @@
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .hero__actions {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-2);
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    padding-inline: 20px;
+  }
+
+  .hero__actions .btn--glass {
+    padding-right: 48px;
   }
 }

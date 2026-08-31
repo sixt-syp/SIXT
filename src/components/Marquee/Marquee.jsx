@@ -1,9 +1,5 @@
 import './Marquee.css'
 
-/**
- * Faixa infinita de texto. O conteúdo é duplicado para o loop não ter emenda;
- * a cópia fica escondida de leitores de tela.
- */
 export default function Marquee({ items, speed = 32, className = '' }) {
   const track = (
     <ul className="marquee__track">

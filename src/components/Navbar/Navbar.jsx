@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { LuArrowRight } from 'react-icons/lu'
 import Button from '../Button/Button'
 import { NAV_LINKS } from '../../data/content'
 import Node from '../Node/Node'
@@ -77,7 +78,7 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__actions">
-          <Button href="#contato" variant="secondary" size="sm" className="nav__cta">
+          <Button href="#contato" variant="ghost" size="sm" className="nav__cta">
             Vamos conversar
           </Button>
 
@@ -127,9 +128,11 @@ export default function Navbar() {
           href="#contato"
           onClick={closeMenu}
           tabIndex={open ? 0 : -1}
+          className="btn--glass"
           style={{ '--i': NAV_LINKS.length }}
         >
           Vamos conversar
+          <LuArrowRight size={16} strokeWidth={2} />
         </Button>
       </div>
     </header>
