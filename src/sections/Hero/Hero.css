@@ -14,18 +14,6 @@
   pointer-events: none;
 }
 
-/* Halo roxo contido — atrás da coluna visual, não da página inteira */
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 8%;
-  right: -6%;
-  width: min(680px, 76vw);
-  height: 560px;
-  background: radial-gradient(closest-side, var(--purple-tint-08), transparent 70%);
-  pointer-events: none;
-}
-
 /* Duas colunas: conteúdo à esquerda, visual à direita */
 .hero__inner {
   min-height: 100svh;

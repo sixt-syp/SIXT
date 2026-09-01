@@ -41,13 +41,6 @@ export default function Hero() {
           <GrowthChart />
         </Reveal>
       </div>
-
-      <a className="hero__scroll-hint" href="#servicos" aria-label="Ir para os serviços">
-        <span className="hero__scroll-track" aria-hidden="true">
-          <LuArrowDown size={14} strokeWidth={2} />
-        </span>
-        <span className="hero__scroll-text">SCROLL</span>
-      </a>
     </section>
   )
 }
